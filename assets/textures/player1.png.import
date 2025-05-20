@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6cee1r272qik"
-path="res://.godot/imported/waxknight.png-aab58db803cc400b2eb5e5997e09bb42.ctex"
+uid="uid://bx6ndfrea6ixo"
+path="res://.godot/imported/player1.png-da8f8cccfc69a12c5b2545436f8ab92f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/waxknight.png"
-dest_files=["res://.godot/imported/waxknight.png-aab58db803cc400b2eb5e5997e09bb42.ctex"]
+source_file="res://assets/textures/player1.png"
+dest_files=["res://.godot/imported/player1.png-da8f8cccfc69a12c5b2545436f8ab92f.ctex"]
 
 [params]
 

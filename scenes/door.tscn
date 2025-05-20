@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd5jdbu351yi5"]
+
+[ext_resource type="Script" uid="uid://bdrksn8pwk88t" path="res://scenes/door.gd" id="1_uvdjg"]
+[ext_resource type="Texture2D" uid="uid://cnkjtfrgih21l" path="res://assets/weapon/sword1.png" id="2_83dcw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_la1wf"]
+size = Vector2(32, 32)
+
+[node name="door" type="Area2D"]
+script = ExtResource("1_uvdjg")
+
+[node name="door" type="Sprite2D" parent="."]
+texture = ExtResource("2_83dcw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 4)
+shape = SubResource("RectangleShape2D_la1wf")

@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=4 uid="uid://desfyvmsvo7wh"]
+
+[ext_resource type="Script" uid="uid://c3bw6y78sadu5" path="res://scenes/roommanager.gd" id="1_72ww3"]
+[ext_resource type="Script" uid="uid://bdrksn8pwk88t" path="res://scenes/door.gd" id="1_gyudw"]
+[ext_resource type="Texture2D" uid="uid://cnkjtfrgih21l" path="res://assets/weapon/sword1.png" id="2_jjxe0"]
+[ext_resource type="Script" uid="uid://dhn4gjpam3adq" path="res://scenes/rooms.gd" id="2_xxtqf"]
+[ext_resource type="TileSet" uid="uid://mgvftwj7kt5q" path="res://scenes/level.tres" id="3_tdakd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_72ww3"]
+size = Vector2(32, 32)
+
+[node name="roommanager" type="Node"]
+script = ExtResource("1_72ww3")
+
+[node name="rooms" type="Node" parent="."]
+script = ExtResource("2_xxtqf")
+
+[node name="floor" type="TileMapLayer" parent="rooms"]
+tile_map_data = PackedByteArray("AAD/////AAABAAUAAAD//wAAAAABAAUAAAAAAP//AAABAAUAAAAAAAAAAAABAAUAAAD//wEAAAABAAUAAAAAAAEAAAABAAUAAAABAP//AAABAAUAAAABAAAAAAABAAUAAAABAAEAAAABAAUAAAD+////AAABAAUAAAD+/wAAAAABAAUAAAD+/wEAAAABAAUAAAACAP//AAABAAUAAAACAAAAAAABAAUAAAACAAEAAAABAAUAAAACAAIAAAABAAUAAAD9/wIAAAABAAUAAAD+/wIAAAABAAUAAAD//wIAAAABAAUAAAAAAAIAAAABAAUAAAABAAIAAAABAAUAAAD9////AAABAAUAAAD9/wAAAAABAAUAAAD9/wEAAAABAAUAAAD9//7/AAABAAUAAAD+//7/AAABAAUAAAD///7/AAABAAUAAAAAAP7/AAABAAUAAAABAP7/AAABAAUAAAACAP7/AAABAAUAAAADAP7/AAABAAUAAAADAP//AAABAAUAAAADAAAAAAABAAUAAAADAAEAAAABAAUAAAADAAIAAAABAAUAAAA=")
+tile_set = ExtResource("3_tdakd")
+rendering_quadrant_size = 32
+
+[node name="walls" type="TileMapLayer" parent="rooms"]
+tile_map_data = PackedByteArray("AAD9//3/AAABAAIAAAD+//3/AAABAAIAAAD///3/AAABAAIAAAAAAP3/AAABAAIAAAABAP3/AAABAAIAAAACAP3/AAABAAIAAAADAP3/AAABAAIAAAAEAP3/AAACAAAAAAD8//3/AAAAAAAAAAAEAP7/AAACAAEAAAAEAP//AAACAAEAAAAEAAAAAAACAAEAAAAEAAEAAAACAAEAAAD8//7/AAAAAAEAAAD8////AAAAAAEAAAD8/wAAAAAAAAEAAAD8/wEAAAAAAAEAAAD8/wIAAAAAAAIAAAAEAAIAAAACAAIAAAD9/wIAAAABAAIAAAD+/wIAAAABAAIAAAD//wIAAAABAAIAAAABAAIAAAABAAIAAAACAAIAAAABAAIAAAADAAIAAAABAAIAAAA=")
+tile_set = ExtResource("3_tdakd")
+
+[node name="normal_rooms" type="Node" parent="rooms"]
+
+[node name="room1" type="Node2D" parent="rooms/normal_rooms"]
+
+[node name="North" type="Marker2D" parent="rooms/normal_rooms/room1"]
+position = Vector2(17, -73)
+
+[node name="South" type="Marker2D" parent="rooms/normal_rooms/room1"]
+position = Vector2(16, 81)
+
+[node name="West" type="Marker2D" parent="rooms/normal_rooms/room1"]
+position = Vector2(-101, 0)
+
+[node name="East" type="Marker2D" parent="rooms/normal_rooms/room1"]
+position = Vector2(134, 0)
+
+[node name="door" type="Area2D" parent="."]
+visible = false
+script = ExtResource("1_gyudw")
+
+[node name="door" type="Sprite2D" parent="door"]
+texture = ExtResource("2_jjxe0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door"]
+position = Vector2(-4, 4)
+shape = SubResource("RectangleShape2D_72ww3")

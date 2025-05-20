@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6cee1r272qik"
-path="res://.godot/imported/waxknight.png-aab58db803cc400b2eb5e5997e09bb42.ctex"
+uid="uid://cnkjtfrgih21l"
+path="res://.godot/imported/sword1.png-1a0ffe81e7f9702ae50451f7fdd4eb96.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/waxknight.png"
-dest_files=["res://.godot/imported/waxknight.png-aab58db803cc400b2eb5e5997e09bb42.ctex"]
+source_file="res://assets/weapon/sword1.png"
+dest_files=["res://.godot/imported/sword1.png-1a0ffe81e7f9702ae50451f7fdd4eb96.ctex"]
 
 [params]
 
