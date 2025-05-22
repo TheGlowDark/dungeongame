@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://pe4vu6hw1tvk"]
+[gd_scene load_steps=28 format=3 uid="uid://pe4vu6hw1tvk"]
 
 [ext_resource type="Script" uid="uid://d4las3x5qgykk" path="res://scenes/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://b73bxfyrtggmr" path="res://assets/textures/player1234.png" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://2f2h48bxiy80" path="res://scenes/weapon.tscn" id="3_qhqgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(9, 7)
@@ -226,13 +227,14 @@ states/walk/position = Vector2(628, 100)
 transitions = ["walk", "idle", SubResource("AnimationNodeStateMachineTransition_qhqgy"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_dqkch"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_g2els")]
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_qhqgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_g2els")
 hframes = 8
 vframes = 4
-frame = 25
+frame = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 10.5)
@@ -248,5 +250,8 @@ tree_root = SubResource("AnimationNodeStateMachine_l71n6")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0.0616353, 0.22967)
 parameters/walk/blend_position = Vector2(-0.277987, -0.120879)
+
+[node name="weapon" parent="." instance=ExtResource("3_qhqgy")]
+position = Vector2(6, 10)
 
 [node name="Camera2D" type="Camera2D" parent="."]
