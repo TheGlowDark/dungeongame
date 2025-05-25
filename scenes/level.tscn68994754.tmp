@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=4 uid="uid://c6iaifi53vtuo"]
 
 [ext_resource type="Script" uid="uid://kquau4pnbycp" path="res://scenes/level.gd" id="1_w8frs"]
+[ext_resource type="PackedScene" uid="uid://pe4vu6hw1tvk" path="res://scenes/player.tscn" id="2_w7c3h"]
 [ext_resource type="TileSet" uid="uid://mgvftwj7kt5q" path="res://scenes/level.tres" id="2_w8frs"]
 [ext_resource type="Script" uid="uid://ron762riics4" path="res://scenes/levels.gd" id="3_mx8sn"]
-[ext_resource type="PackedScene" uid="uid://pe4vu6hw1tvk" path="res://scenes/player.tscn" id="5_2r41h"]
 [ext_resource type="Script" uid="uid://dyg64weu2wqdx" path="res://scenes/camera_2d.gd" id="5_ppgk2"]
 
 [node name="Level1" type="Node2D"]
@@ -25,4 +25,5 @@ position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 script = ExtResource("5_ppgk2")
 
-[node name="Player" parent="." instance=ExtResource("5_2r41h")]
+[node name="Player" parent="." instance=ExtResource("2_w7c3h")]
+position = Vector2(2288, 2288)

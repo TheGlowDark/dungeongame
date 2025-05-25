@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://bhkj1xlqrsck2"]
+
+[ext_resource type="Texture2D" uid="uid://b1s62bh1i6rng" path="res://assets/textures/enemies/cultist/cultist_walk.png" id="1_cb6f2"]
+[ext_resource type="Script" uid="uid://goo7nlutisjx" path="res://scenes/enemy_cultsit.gd" id="1_dwev6"]
+[ext_resource type="Script" uid="uid://xd0is48t44l3" path="res://scenes/state_machine.gd" id="3_miwvq"]
+[ext_resource type="Script" uid="uid://08xnqhpyecnd" path="res://scripts/enemy_idle.gd" id="4_m46wk"]
+[ext_resource type="Script" uid="uid://dlckcgto3plyl" path="res://scripts/enemy_follow.gd" id="5_xbor1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cb6f2"]
+size = Vector2(13, 9)
+
+[node name="Enemy_cultsit" type="CharacterBody2D"]
+script = ExtResource("1_dwev6")
+speed = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 4.5)
+shape = SubResource("RectangleShape2D_cb6f2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("1_cb6f2")
+hframes = 4
+vframes = 4
+
+[node name="State_machine" type="Node" parent="."]
+script = ExtResource("3_miwvq")
+
+[node name="idle" type="Node" parent="State_machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("4_m46wk")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://08xnqhpyecnd"
+
+[node name="follow" type="Node" parent="State_machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_xbor1")
+enemy = NodePath("../..")
