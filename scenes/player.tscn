@@ -235,7 +235,7 @@ speed = 150.0
 texture = ExtResource("2_g2els")
 hframes = 8
 vframes = 4
-frame = 24
+frame = 26
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 10.5)

@@ -5,3 +5,5 @@ class_name Enemy_idle
 
 func Enter():
 	pass
+
+ 

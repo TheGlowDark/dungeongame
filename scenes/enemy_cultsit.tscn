@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b1s62bh1i6rng" path="res://assets/textures/enemies/cultist/cultist_walk.png" id="1_cb6f2"]
 [ext_resource type="Script" uid="uid://goo7nlutisjx" path="res://scenes/enemy_cultsit.gd" id="1_dwev6"]
 [ext_resource type="Script" uid="uid://xd0is48t44l3" path="res://scenes/state_machine.gd" id="3_miwvq"]
-[ext_resource type="Script" uid="uid://08xnqhpyecnd" path="res://scripts/enemy_idle.gd" id="4_m46wk"]
+[ext_resource type="Script" uid="uid://bxuvjqjux5idf" path="res://scenes/idle.gd" id="5_dvlbs"]
 [ext_resource type="Script" uid="uid://dlckcgto3plyl" path="res://scripts/enemy_follow.gd" id="5_xbor1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cb6f2"]
@@ -23,14 +23,15 @@ texture = ExtResource("1_cb6f2")
 hframes = 4
 vframes = 4
 
-[node name="State_machine" type="Node" parent="."]
+[node name="State_machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_miwvq")
-
-[node name="idle" type="Node" parent="State_machine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("4_m46wk")
-enemy = NodePath("../..")
-metadata/_custom_type_script = "uid://08xnqhpyecnd"
+initial_state = NodePath("idle")
 
 [node name="follow" type="Node" parent="State_machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_xbor1")
 enemy = NodePath("../..")
+
+[node name="idle" type="Node" parent="State_machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_dvlbs")
+enemy = NodePath("../..")
+speed = 100.0
