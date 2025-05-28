@@ -25,6 +25,10 @@ window/stretch/aspect="ignore"
 mouse_cursor/custom_image="uid://cxvx4j8h87d07"
 mouse_cursor/custom_image_hotspot=Vector2(32, 32)
 
+[global_group]
+
+player=""
+
 [input]
 
 move_right={

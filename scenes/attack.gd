@@ -5,7 +5,6 @@ extends State
 var is_dashing = false 
 @export var dashing_duration = 0.1
 var dashing_timer = dashing_duration
-@export var attack_speed_boost = 150
 @onready var dash_direction: Vector2
 func enter():
 	player.can_attack = false
@@ -25,7 +24,7 @@ func update(delta : float):
 		state_transition.emit(self, 'idle')
 
 func move(input_dir: Vector2, _delta: float):
-	player.velocity = input_dir * attack_speed_boost
+	player.velocity = input_dir * player.attack_speed_boost
 	# flipping sprite if needed
 
 	if input_dir == Vector2.ZERO:

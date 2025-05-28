@@ -1,15 +1,14 @@
 extends State
 
 @onready var enemy = $"../.."
-@export var attack_distance = 128
 
 func enter():
 	enemy.animation_travel("walk")
 	
 func update(_delta):
+	enemy.update_animation(enemy.get_distance().normalized())
 	if enemy.health <= 0:
 		state_transition.emit(self, "death")
-	var distance = (enemy.player.global_position - enemy.global_position)
-	enemy.velocity = distance * enemy.speed
-	if(distance <= attack_distance):
+	enemy.velocity = enemy.get_distance().normalized() * Vector2(1, -1) * enemy.speed
+	if(enemy.get_distance().length() <= enemy.attack_distance):
 		state_transition.emit(self, "attack")

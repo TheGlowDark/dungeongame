@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq2h1bfcc0p5m"]
+
+[ext_resource type="Script" uid="uid://bljaboi1u32ae" path="res://scenes/bullet.gd" id="1_y25gk"]
+[ext_resource type="Texture2D" uid="uid://b18aauox1kacr" path="res://assets/textures/enemies/bullet/bullet.png" id="2_l5glv"]
+
+[node name="Node2D" type="Area2D"]
+z_index = 75
+collision_mask = 7
+script = ExtResource("1_y25gk")
+speed = 200
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_l5glv")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(6, -3, 6, 3, 5, 3, 5, 4, 4, 4, 4, 5, 3, 5, 3, 6, -3, 6, -3, 5, -4, 5, -4, 4, -5, 4, -5, 3, -6, 3, -6, -3, -5, -3, -5, -4, -4, -4, -4, -5, -3, -5, -3, -6, 3, -6, 3, -5, 4, -5, 4, -4, 5, -4, 5, -3)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -76,12 +76,9 @@ extends character_base
 class_name Player
 
 # Настройки движения
-
-@export var dash_distance: float = 128    # Дистанция рывка
-@export var dash_speed: float = 300      # Скорость рывка
-
+@export var speed = 70
 @export var start_position: Vector2
-@export var speed = 150.0
+@export var attack_speed_boost = 100
 var can_attack := true
 @export var attack_cooldown := 0.5
 var attack_cooldown_timer = attack_cooldown
@@ -101,7 +98,7 @@ func _physics_process(_delta):
 		if attack_cooldown_timer <= 0:
 			can_attack = true
 			attack_cooldown_timer = attack_cooldown
-	print(can_attack)
+	#print(can_attack)
 	# StateMachine теперь управляет всем
 	#get_input()
 #	$state_machine._physics_process(delta)

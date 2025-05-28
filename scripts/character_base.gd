@@ -2,7 +2,7 @@ class_name character_base extends CharacterBody2D
  
 @onready var animation_tree:= $AnimationTree
 @onready var animation_state_machine = animation_tree["parameters/playback"] 
-@onready var animation_player:= $AnimationPlayer
+#@onready var animation_player = $AnimationTree.get("anim_player")
 @onready var sprite := $Sprite2D
 @export var health : int
 var invincible : bool = false

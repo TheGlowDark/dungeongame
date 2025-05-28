@@ -548,8 +548,6 @@ attack_distance = 96
 speed = 50
 health = 2
 
-[node name="bullletspawn" type="Marker2D" parent="."]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 4.25)
 shape = SubResource("RectangleShape2D_cb6f2")

@@ -93,11 +93,6 @@ blend_mode = 1
 reset = false
 advance_mode = 0
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dqkch"]
-reset = false
-switch_mode = 1
-advance_mode = 0
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g2els"]
 advance_mode = 2
 
@@ -116,6 +111,9 @@ advance_mode = 0
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3v2ag"]
 advance_mode = 0
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jej6c"]
+advance_mode = 0
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_l71n6"]
 states/End/position = Vector2(1254, 115)
 states/Start/position = Vector2(174, 100)
@@ -127,7 +125,7 @@ states/idle/node = SubResource("AnimationNodeBlendSpace2D_oprun")
 states/idle/position = Vector2(766, 186)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_60mlk")
 states/walk/position = Vector2(787, 81)
-transitions = ["walk", "idle", SubResource("AnimationNodeStateMachineTransition_qhqgy"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_dqkch"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_g2els"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_ur7pv"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_y4r1p"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_smehm"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_d2wvv"), "walk", "hurt", SubResource("AnimationNodeStateMachineTransition_3v2ag")]
+transitions = ["walk", "idle", SubResource("AnimationNodeStateMachineTransition_qhqgy"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_g2els"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_ur7pv"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_y4r1p"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_smehm"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_d2wvv"), "walk", "hurt", SubResource("AnimationNodeStateMachineTransition_3v2ag"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_jej6c")]
 
 [sub_resource type="Animation" id="Animation_d2wvv"]
 length = 0.001
@@ -381,10 +379,10 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(9, 7)
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" groups=["Player", "player"]]
 z_index = 1
 script = ExtResource("1_qhqgy")
-speed = 75.0
+attack_speed_boost = 120
 health = 3
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -400,17 +398,18 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -11)
 texture = ExtResource("2_smehm")
 hframes = 8
 vframes = 6
 frame = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 10.5)
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="weapon" parent="." instance=ExtResource("3_qhqgy")]
-position = Vector2(6, 10)
+position = Vector2(4, 1)
 
 [node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_dqkch")

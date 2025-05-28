@@ -453,7 +453,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_hosmv"]
 resource_name = "walk_down"
-length = 0.6
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -469,7 +469,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_53llk"]
 resource_name = "walk_left"
-length = 0.6
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -485,7 +485,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_cdia0"]
 resource_name = "walk_right"
-length = 0.6
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -501,7 +501,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_u5wub"]
 resource_name = "walk_up"
-length = 0.6
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -541,14 +541,11 @@ _data = {
 }
 
 [node name="Enemy_cultsit" type="CharacterBody2D" groups=["player"]]
-collision_layer = 2
-collision_mask = 2
 script = ExtResource("1_dwev6")
-attack_distance = 96
-speed = 50
+attack_distance = 64
+speed = null
+attack_cooldown = null
 health = 2
-
-[node name="bullletspawn" type="Marker2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 4.25)
