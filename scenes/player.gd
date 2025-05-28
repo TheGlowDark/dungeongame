@@ -72,48 +72,45 @@
 		#animation_state_machine.travel("walk")
 	#else:
 		#animation_state_machine.travel("idle")
-extends Character
+extends character_base
 class_name Player
 
 # Настройки движения
 
-@onready var animation_tree = $AnimationTree
-@onready var animation_state_machine = animation_tree.get("parameters/playback")
+@export var dash_distance: float = 128    # Дистанция рывка
+@export var dash_speed: float = 300      # Скорость рывка
+
+
 @export var start_position: Vector2
+@export var speed = 150.0
+var can_attack := true
+@export var attack_cooldown := 0.5
+var attack_cooldown_timer = attack_cooldown
 
 # Переменные состояния
 var input_vector: Vector2 = Vector2.ZERO
 var look_direction: Vector2 = Vector2.DOWN  # Направление взгляда (к курсору)
 
 func _ready():
+	animation_tree.active = true
 	update_animation(look_direction)
-	
-func _physics_process(delta):
-	# Получаем ввод игрока
-	get_input()
-	
-	# Обработка зума камеры
-	#if Input.is_action_just_pressed("clickright"):
-		#$Camera2D.zoom /= 2
-	#if Input.is_action_just_pressed("clickleft"):
-		#$Camera2D.zoom *= 2
-	#
-	# Обновляем направление взгляда к курсору
-	update_look_direction()
-	
-	# Обрабатываем движение
-	handle_movement(delta)
-	
-	# Обновляем анимацию
-	update_animation(look_direction)
-	
-	# Применяем движение
+#	$state_machine.character = self  # Важно передать ссылку на персонажа
+
+func _physics_process(_delta):
+	if not can_attack:
+		attack_cooldown_timer -= _delta
+		if attack_cooldown_timer <= 0:
+			can_attack = true
+			attack_cooldown_timer = attack_cooldown
+	print(can_attack)
+	# StateMachine теперь управляет всем
+	#get_input()
+#	$state_machine._physics_process(delta)
 	move_and_slide()
-	
-	pick_new_state()
+
 
 func get_input():
-	input_vector = Vector2(
+	return Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	).normalized()
@@ -129,20 +126,17 @@ func update_look_direction():
 		$weapon.z_index = -1
 	else:
 		$weapon.z_index = 1
+	return look_direction
 
-func handle_movement(delta):
-	if input_vector != Vector2.ZERO:
-		velocity = input_vector * speed
-	else:
-		velocity = Vector2.ZERO
+#func handle_movement(delta):
+	#if input_vector != Vector2.ZERO:
+		#velocity = input_vector * speed
+	#else:
+		#velocity = Vector2.ZERO
 
-func update_animation(direction: Vector2):
-	# Устанавливаем blend_position для анимаций
-	animation_tree.set("parameters/idle/blend_position", direction)
-	animation_tree.set("parameters/walk/blend_position", direction)
 
-func pick_new_state():
-	if velocity != Vector2.ZERO:
-		animation_state_machine.travel("walk")
-	else:
-		animation_state_machine.travel("idle")
+#func pick_new_state():
+	#if velocity != Vector2.ZERO:
+		#animation_state_machine.travel("walk")
+	#else:
+		#animation_state_machine.travel("idle")

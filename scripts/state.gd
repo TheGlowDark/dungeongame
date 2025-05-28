@@ -1,16 +1,13 @@
-extends Node
-class_name State
+class_name State extends Node
 
-signal Transitioned
+@warning_ignore("unused_signal")
+signal state_transition
 
-func Enter():
+func enter():
 	pass
 
-func Exit():
+func update(_delta):
 	pass
 
-func Update(_detla: float):
-	pass
-
-func Physics_update(delta: float):
+func exit():
 	pass
