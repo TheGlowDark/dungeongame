@@ -80,7 +80,6 @@ class_name Player
 @export var dash_distance: float = 128    # Дистанция рывка
 @export var dash_speed: float = 300      # Скорость рывка
 
-
 @export var start_position: Vector2
 @export var speed = 150.0
 var can_attack := true
@@ -133,6 +132,22 @@ func update_look_direction():
 		#velocity = input_vector * speed
 	#else:
 		#velocity = Vector2.ZERO
+
+#func update_animation(direction: Vector2):
+	## Устанавливаем blend_position для анимаций
+	#if(direction != Vector2.ZERO):
+		#animation_tree.set("parameters/idle/blend_position", direction)
+		#animation_tree.set("parameters/walk/blend_position", direction)
+		#animation_tree.set("parameters/hurt/blend_position", direction)
+		#animation_tree.set("parameters/death/blend_position", direction)
+		#animation_tree.set("parameters/attack/blend_position", direction)
+#
+#
+#func animation_travel(state: String):
+	#if animation_state_machine != null:
+		#animation_state_machine.travel(state)
+#	else:
+#		push_error("Cannot travel - state machine is null")
 
 
 #func pick_new_state():

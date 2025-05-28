@@ -36,4 +36,4 @@ tile_map_data = PackedByteArray("AAD8/wQAAAABAAIAAAD9/wQAAAABAAIAAAD+/wQAAAABAAI
 tile_set = ExtResource("1_ealf6")
 
 [node name="Enemy_cultsit" parent="." instance=ExtResource("2_yb8p6")]
-position = Vector2(260, 86)
+position = Vector2(275, 166)
