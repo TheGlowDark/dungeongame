@@ -82,6 +82,7 @@ class_name Player
 var can_attack = true
 var is_alive = true
 var is_attack = false
+@onready var current_room = $"..".start_position
 @export var attack_cooldown := 0.5
 var attack_cooldown_timer = attack_cooldown
 

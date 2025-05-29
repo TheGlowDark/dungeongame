@@ -32,8 +32,9 @@ func _ready():
 	print_layout()
 	get_room_array()
 	build_dungeon()
+	layout[start_room_pos.x][start_room_pos.y] *= -1
 	
-	#print(rooms)
+	print(rooms)
 	$Player.position = start_position
 	$Camera2D.position = start_position
 
@@ -47,9 +48,10 @@ func build_dungeon():
 
 func draw_room(y, x):
 	var s = room_pool[randi_range(0, room_pool.size()-1)].instantiate()
+	s.room_position = Vector2(y, x)
 	s.position = Vector2(x * ROOM_SIZE_PIXELS, y * ROOM_SIZE_PIXELS)
-	if layout[x][y] == RoomType.START:
-		s.enter()
+#wa	if layout[x][y] == RoomType.START:
+#		s.enter()
 	#var room = get_room_path(randi_range(0, map_number)).instantiate()
 	add_child(s) 
 	#наверх направо вниз налево
@@ -67,6 +69,7 @@ func add_one_door(y, x, add_x, add_y,s,n):
 	if ((x >= 0) && (x < GRID_WIDTH) && (y >= 0) && (y < GRID_HEIGHT) && (layout[y][x] != RoomType.EMPTY)):
 		var d = preload("res://scenes/door.tscn").instantiate()
 		d.transform = s.get_child(n).transform
+		d.side = n
 		#Задали положение для телепорта
 		#Умножаем на размер комнаты
 		d.set_next_pos(Vector2(x*ROOM_SIZE_PIXELS+add_x,y*ROOM_SIZE_PIXELS+add_y))

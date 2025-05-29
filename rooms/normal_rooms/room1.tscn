@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=4 uid="uid://bxhgvjl84pwu3"]
+[gd_scene load_steps=5 format=4 uid="uid://bxhgvjl84pwu3"]
 
 [ext_resource type="TileSet" uid="uid://mgvftwj7kt5q" path="res://scenes/level.tres" id="1_ealf6"]
 [ext_resource type="Script" uid="uid://bye5f4mqcsr34" path="res://rooms/normal_rooms/room.gd" id="1_g4tch"]
 [ext_resource type="PackedScene" uid="uid://bhkj1xlqrsck2" path="res://scenes/enemy_cultsit.tscn" id="2_yb8p6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4tch"]
+size = Vector2(287, 292)
 
 [node name="room1" type="Node2D"]
 script = ExtResource("1_g4tch")
@@ -51,3 +54,11 @@ z_index = 250
 offset_right = 337.0
 offset_bottom = 352.0
 color = Color(0, 0, 0, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(176.5, 175)
+shape = SubResource("RectangleShape2D_g4tch")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
