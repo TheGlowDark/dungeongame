@@ -27,7 +27,7 @@ func update(_delta):
 
 func exit():
 	var b = bullet.instantiate()
-	enemy.get_parent().add_child(b)
+	enemy.get_parent().get_parent().add_child(b)
 	# Устанавливаем позицию пули в позицию точки спавна
 	# Направление пули к игроку
 	b.global_position = bulletspawnpoint.global_position

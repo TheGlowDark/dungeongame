@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://bhkj1xlqrsck2"]
+[gd_scene load_steps=71 format=3 uid="uid://bhkj1xlqrsck2"]
 
 [ext_resource type="Script" uid="uid://goo7nlutisjx" path="res://scenes/enemy_cultsit.gd" id="1_dwev6"]
 [ext_resource type="Texture2D" uid="uid://bqty0dajrk6i0" path="res://assets/textures/enemies/cultist/cultist.png" id="2_miwvq"]
@@ -546,6 +546,9 @@ _data = {
 &"walk_up": SubResource("Animation_u5wub")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgyi7"]
+size = Vector2(20, 14)
+
 [node name="Enemy_cultsit" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 2
@@ -575,7 +578,7 @@ parameters/walk/blend_position = Vector2(-0.00123918, -0.193407)
 libraries = {
 &"": SubResource("AnimationLibrary_ytd26")
 }
-autoplay = "walk_left"
+autoplay = "RESET"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -6)
@@ -606,3 +609,18 @@ script = ExtResource("8_hgyi7")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+debug_path_custom_point_size = 10.25
+debug_path_custom_line_width = 0.3
+
+[node name="Path_check" type="Timer" parent="."]
+autostart = true
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_hgyi7")
+target_position = Vector2(-61, 0)
+collision_mask = 6
+
+[connection signal="timeout" from="Path_check" to="." method="_on_path_check_timeout"]

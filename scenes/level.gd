@@ -48,6 +48,8 @@ func build_dungeon():
 func draw_room(y, x):
 	var s = room_pool[randi_range(0, room_pool.size()-1)].instantiate()
 	s.position = Vector2(x * ROOM_SIZE_PIXELS, y * ROOM_SIZE_PIXELS)
+	if layout[x][y] == RoomType.START:
+		s.enter()
 	#var room = get_room_path(randi_range(0, map_number)).instantiate()
 	add_child(s) 
 	#наверх направо вниз налево
@@ -55,6 +57,7 @@ func draw_room(y, x):
 	add_one_door(y, x + 1, TILE_SIZE * 2, ROOM_SIZE_PIXELS / 2, s,1) 
 	add_one_door(y + 1, x, ROOM_SIZE_PIXELS / 2, TILE_SIZE * 2,s,2)
 	add_one_door(y,x - 1,ROOM_SIZE_PIXELS - TILE_SIZE * 2, ROOM_SIZE_PIXELS / 2,s,3)
+	
 
 func add_one_door(y, x, add_x, add_y,s,n):
 	#Делаем сложную проверку:

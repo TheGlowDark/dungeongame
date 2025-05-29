@@ -27,3 +27,9 @@ position_smoothing_speed = 4.0
 script = ExtResource("5_ppgk2")
 
 [node name="Player" parent="." instance=ExtResource("5_2r41h")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -50
+offset_right = 7007.0
+offset_bottom = 5921.0
+color = Color(0, 0, 0, 1)

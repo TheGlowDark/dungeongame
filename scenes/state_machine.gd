@@ -41,8 +41,8 @@ func force_change_state(new_state_name: String):
 
 func change_state(source_state: State, new_state_name: String):
 	if source_state != current_state:
-		print("Invalid change_state trying form: " +\
-		 	  source_state.name + " but currently in: " + current_state.name)
+		#print("Invalid change_state trying form: " +\
+		 #	  source_state.name + " but currently in: " + current_state.name)
 		return
 
 	var new_state: State = states.get(new_state_name.to_lower())

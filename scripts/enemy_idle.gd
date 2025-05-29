@@ -10,8 +10,11 @@ func update(_delta):
 		state_transition.emit(self, "death")
 	enemy.update_animation(enemy.get_distance().normalized())
 	enemy.velocity = Vector2.ZERO
-	if(enemy.get_distance().length() <= enemy.attack_distance):
-		state_transition.emit(self, "attack")
+#	if(enemy.get_distance().length() <= enemy.attack_distance):
+#		state_transition.emit(self, "attack")
 	if(enemy.get_player.global_position.distance_to(enemy.global_position) <= 256):
 		state_transition.emit(self, "walk")
 		
+	if(enemy.player_attack_check()):
+		enemy.velocity = Vector2.ZERO
+		state_transition.emit(self, "attack")
