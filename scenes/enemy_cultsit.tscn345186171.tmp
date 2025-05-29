@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://bhkj1xlqrsck2"]
+[gd_scene load_steps=68 format=3 uid="uid://bhkj1xlqrsck2"]
 
 [ext_resource type="Script" uid="uid://goo7nlutisjx" path="res://scenes/enemy_cultsit.gd" id="1_dwev6"]
 [ext_resource type="Texture2D" uid="uid://bqty0dajrk6i0" path="res://assets/textures/enemies/cultist/cultist.png" id="2_miwvq"]
@@ -166,12 +166,6 @@ advance_mode = 0
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ohs8l"]
 advance_mode = 0
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u5222"]
-advance_mode = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0motp"]
-advance_mode = 0
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_u5222"]
 states/Start/position = Vector2(121, 111)
 states/attack/node = SubResource("AnimationNodeBlendSpace2D_miwvq")
@@ -179,12 +173,12 @@ states/attack/position = Vector2(666, 139)
 states/death/node = SubResource("AnimationNodeBlendSpace2D_m46wk")
 states/death/position = Vector2(736, 32)
 states/hurt/node = SubResource("AnimationNodeBlendSpace2D_xbor1")
-states/hurt/position = Vector2(550, 233)
+states/hurt/position = Vector2(521, 220)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_dvlbs")
 states/idle/position = Vector2(406, 100)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_bcjmo")
-states/walk/position = Vector2(193, 212)
-transitions = ["walk", "attack", SubResource("AnimationNodeStateMachineTransition_hgyi7"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_l06os"), "attack", "hurt", SubResource("AnimationNodeStateMachineTransition_ytd26"), "walk", "hurt", SubResource("AnimationNodeStateMachineTransition_ie1m3"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_jnu8q"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_q145h"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_p6j80"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_gqgfl"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_2nb7p"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_ohs8l"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_u5222"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_0motp")]
+states/walk/position = Vector2(170, 212)
+transitions = ["walk", "attack", SubResource("AnimationNodeStateMachineTransition_hgyi7"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_l06os"), "attack", "hurt", SubResource("AnimationNodeStateMachineTransition_ytd26"), "walk", "hurt", SubResource("AnimationNodeStateMachineTransition_ie1m3"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_jnu8q"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_q145h"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_p6j80"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_gqgfl"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_2nb7p"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_ohs8l")]
 
 [sub_resource type="Animation" id="Animation_m46wk"]
 length = 0.001
@@ -475,7 +469,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_53llk"]
 resource_name = "walk_left"
-length = 0.6
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -569,13 +563,13 @@ parameters/attack/blend_position = Vector2(0, 0)
 parameters/death/blend_position = Vector2(0, 0)
 parameters/hurt/blend_position = Vector2(0, 0)
 parameters/idle/blend_position = Vector2(0, 0.0120878)
-parameters/walk/blend_position = Vector2(-0.00123918, -0.193407)
+parameters/walk/blend_position = Vector2(-0.00867409, -0.0483516)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_ytd26")
 }
-autoplay = "walk_left"
+autoplay = "walk_down"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -6)
@@ -585,7 +579,7 @@ vframes = 8
 
 [node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_miwvq")
-initial_state = NodePath("idle")
+initial_state = NodePath("walk")
 metadata/_custom_type_script = "uid://xd0is48t44l3"
 
 [node name="attack" type="Node" parent="state_machine"]

@@ -1,8 +1,8 @@
 extends Camera2D
 
 var d_offset: Vector2
-var min_offset = -128
-var max_offset = 128
+var min_offset = -160
+var max_offset = 160
 
 func _ready() -> void:
 	position = $"..".start_position

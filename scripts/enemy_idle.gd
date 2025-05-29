@@ -6,6 +6,8 @@ func enter():
 	enemy.animation_travel("idle")
 	
 func update(_delta):
+	if enemy.health <= 0:
+		state_transition.emit(self, "death")
 	enemy.update_animation(enemy.get_distance().normalized())
 	enemy.velocity = Vector2.ZERO
 	if(enemy.get_distance().length() <= enemy.attack_distance):

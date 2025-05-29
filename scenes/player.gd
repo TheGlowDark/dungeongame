@@ -79,7 +79,9 @@ class_name Player
 @export var speed = 70
 @export var start_position: Vector2
 @export var attack_speed_boost = 100
-var can_attack := true
+var can_attack = true
+var is_alive = true
+var is_attack = false
 @export var attack_cooldown := 0.5
 var attack_cooldown_timer = attack_cooldown
 
@@ -93,6 +95,8 @@ func _ready():
 #	$state_machine.character = self  # Важно передать ссылку на персонажа
 
 func _physics_process(_delta):
+	if not is_alive:
+		return 
 	if not can_attack:
 		attack_cooldown_timer -= _delta
 		if attack_cooldown_timer <= 0:

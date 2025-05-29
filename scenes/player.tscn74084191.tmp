@@ -428,6 +428,8 @@ script = ExtResource("7_ur7pv")
 
 [node name="attack" type="Node" parent="state_machine"]
 script = ExtResource("7_fjrip")
+swing_durability = null
+dashing_duration = null
 
 [node name="hurt" type="Node" parent="state_machine"]
 script = ExtResource("8_smehm")

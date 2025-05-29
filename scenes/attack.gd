@@ -1,15 +1,19 @@
 extends State
 
 @onready var player := $"../.."
+@onready var weapon := $"../../weapon"
 @export var swing_durability = 0.5
 var is_dashing = false 
 @export var dashing_duration = 0.1
 var dashing_timer = dashing_duration
 @onready var dash_direction: Vector2
 func enter():
+	player.is_attack = true
+	weapon.attack()
 	player.can_attack = false
 	dashing_timer = dashing_duration
 	dash_direction = player.update_look_direction()
+	
 	#if player:
 		#player.animation_travel("attack")
 
@@ -17,10 +21,13 @@ func enter():
 func update(delta : float):
 	if player.health <= 0:
 		state_transition.emit(self, "death")
-	move(player.update_look_direction(), delta)
+	move(dash_direction, delta)
 	if dashing_timer >= 0:
 		dashing_timer -= delta
 	else:
+		await weapon.animationplayer.animation_finished
+		weapon.idle()
+		player.is_attack = false
 		state_transition.emit(self, 'idle')
 
 func move(input_dir: Vector2, _delta: float):

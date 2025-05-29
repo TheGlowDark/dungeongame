@@ -4,20 +4,25 @@ extends State
 @onready var bullet := preload("res://scenes/bullet.tscn")
 
 func enter():
+	if enemy.health <= 0:
+		state_transition.emit(self, "death")
 	if enemy.attack_timer.is_stopped():
 		enemy.animation_travel("attack")
-		enemy.velocity = Vector2.ZERO
+		#enemy.velocity = Vector2.ZERO
 		enemy.attack_timer.wait_time = 2.0
 		enemy.attack_timer.start()
 		enemy.can_attack = false
+	else:
+		state_transition.emit(self, "idle")
+		
 		
 
 func update(_delta):
-	enemy.update_animation(enemy.get_distance().normalized())
-	if enemy.health == 0:
+	if enemy.health <= 0:
 		state_transition.emit(self, "death")
+	enemy.update_animation(enemy.get_distance().normalized())
 	if enemy.attack_timer.is_stopped():
-		state_transition.emit(self, "walk")
+		state_transition.emit(self, "idle")
 	
 
 func exit():
