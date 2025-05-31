@@ -6,9 +6,11 @@ const ROOM_SIZE = 11    # Размер комнаты в тайлах (нече�
 const TILE_SIZE := 32  # Размер одного тайла в пикселях
 const ROOM_SIZE_PIXELS := ROOM_SIZE * TILE_SIZE  # Общий размер комнаты в пикселях
 
-const map_root = "res://rooms/normal_rooms/room"
-func get_room_path(index):
-	return map_root + str(index) + ".tscn"
+const map_root := "res://rooms/normal_rooms/room"
+const start_root := "res://rooms/start_rooms/start_room"
+
+func get_room_path(cur_root, index: int):
+	return cur_root + str(index) + ".tscn"
 
 const map_number = 1
 
@@ -20,6 +22,7 @@ enum RoomType {EMPTY, NORMAL, START, BOSS, SECRET}
 var layout = []        # 2D массив типов комнат
 var rooms = {}         # Словарь позиций и данных комнат
 var room_pool = []
+var start_room_pool = []
 
 var start_position = Vector2(ROOM_SIZE_PIXELS * round(GRID_WIDTH/2) + ROOM_SIZE_PIXELS / 2,ROOM_SIZE_PIXELS * round(GRID_WIDTH/2) + ROOM_SIZE_PIXELS / 2)
 var start_room_pos = Vector2(6, 6)  # Центральная позиция
@@ -34,7 +37,7 @@ func _ready():
 	build_dungeon()
 	layout[start_room_pos.x][start_room_pos.y] *= -1
 	
-	print(rooms)
+	#print(rooms)
 	$Player.position = start_position
 	$Camera2D.position = start_position
 
@@ -47,7 +50,11 @@ func build_dungeon():
 
 
 func draw_room(y, x):
-	var s = room_pool[randi_range(0, room_pool.size()-1)].instantiate()
+	var s
+	if Vector2(y, x) == start_room_pos:
+		s = start_room_pool[0].instantiate()
+	else:
+		s = room_pool[randi_range(0, room_pool.size()-1)].instantiate()
 	s.room_position = Vector2(y, x)
 	s.position = Vector2(x * ROOM_SIZE_PIXELS, y * ROOM_SIZE_PIXELS)
 #wa	if layout[x][y] == RoomType.START:
@@ -79,12 +86,13 @@ func add_one_door(y, x, add_x, add_y,s,n):
 
 
 func get_room_array():
+	start_room_pool.append(load(get_room_path(start_root, 0)))
 	#Счётчик
 	var i = 1
 	while true:
 		#Если такая сцена есть, то добавляем в массив
-		if load(get_room_path(i)) != null:
-			room_pool.append(load(get_room_path(i)))
+		if load(get_room_path(map_root, i)) != null:
+			room_pool.append(load(get_room_path(map_root, i)))
 		#Иначе заканчиваем while
 		#У меня все комнаты идут по порядку(Room1,Room2...)
 		#Можно сделать чуть иначе, но так проще...

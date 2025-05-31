@@ -8,11 +8,6 @@ func enter():
 		state_transition.emit(self, "death")
 	enemy.update_animation(enemy.get_distance().normalized)
 	enemy.animation_travel("hurt")
-	knockback()
 	await enemy.animation_player.animtion_finished
 	state_transition.emit(self, 'idle')
 	
-func knockback():
-	var direction = (enemy.get_player.global_position - enemy.player.global_position)
-	enemy.velocity = -direction.normalized() * knockback_speed
-	#enemy.move_and_slide()

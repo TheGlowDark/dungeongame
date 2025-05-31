@@ -1,10 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://2f2h48bxiy80"]
+[gd_scene load_steps=7 format=3 uid="uid://2f2h48bxiy80"]
 
 [ext_resource type="Script" uid="uid://hlki3a30hnnv" path="res://weapon.gd" id="1_uxn4k"]
 [ext_resource type="Texture2D" uid="uid://driqnrjo0qaly" path="res://assets/textures/weapon/sword.png" id="2_uxn4k"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxn4k"]
-size = Vector2(31, 23)
 
 [sub_resource type="Animation" id="Animation_bmw2d"]
 length = 0.001
@@ -62,11 +59,6 @@ _data = {
 
 [node name="weapon" type="Area2D"]
 script = ExtResource("1_uxn4k")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visibility_layer = 3
-position = Vector2(13.5, -1.5)
-shape = SubResource("RectangleShape2D_uxn4k")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(12, 0)

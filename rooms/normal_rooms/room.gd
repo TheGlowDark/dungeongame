@@ -1,21 +1,21 @@
-extends Node2D
-class_name Room
+extends Room
+class_name Dungeon_room
 
-var room_position = Vector2.ZERO
 @onready var enemies_list = $Enemies
-@onready var get_player:= get_tree().get_nodes_in_group("player")[0]
-@onready var fog = $ColorRect
-var s_entered = false
-var is_clear = false
 
-func ready():
-	is_clear = clear_check()
-
-func clear_check():
-	return enemies_list.get_child_count() == 0
-
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Player and fog:
+func _ready():
+	enemies_count = enemies_list.get_child_count()
+	
+func _on_area_2d_body_entered(body) -> void:
+	if body is Player and is_instance_valid(fog):
+	#	get_tree().call_group(id, "set_process_mode", Node.PROCESS_MODE_INHERIT)
 		fog.queue_free()
-		
+		is_entered = true
+		is_current = true
+		if is_instance_valid(enemies_list):
+			for enemy in enemies_list.get_children():
+				enemy.activate_enemy()
+				
+func _on_area_2d_body_exited(body) -> void:
+	if body is Player:
+		is_current = false

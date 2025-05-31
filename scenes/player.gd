@@ -79,6 +79,11 @@ class_name Player
 @export var speed = 70
 @export var start_position: Vector2
 @export var attack_speed_boost = 100
+@export var hp_limit = 3
+
+@onready var hp_container = $UI/HP
+@onready var hp_icon_scene := preload("res://scenes/hp.tscn")
+
 var can_attack = true
 var is_alive = true
 var is_attack = false
@@ -91,6 +96,7 @@ var input_vector: Vector2 = Vector2.ZERO
 var look_direction: Vector2 = Vector2.DOWN  # Направление взгляда (к курсору)
 
 func _ready():
+	update_hp_icons()
 	animation_tree.active = true
 	update_animation(look_direction)
 #	$state_machine.character = self  # Важно передать ссылку на персонажа
@@ -103,11 +109,30 @@ func _physics_process(_delta):
 		if attack_cooldown_timer <= 0:
 			can_attack = true
 			attack_cooldown_timer = attack_cooldown
+#	time = float(time) + _delta
+	update_time()
 	#print(can_attack)
 	# StateMachine теперь управляет всем
 	#get_input()
 #	$state_machine._physics_process(delta)
 	move_and_slide()
+
+func update_hp_icons():
+	var hp_icons = hp_container.get_children()
+	var delta_hp = health - hp_icons.size()
+	if delta_hp > 0:
+		for i in range(delta_hp):
+			var hp_icon = hp_icon_scene.instantiate()
+			hp_container.add_child(hp_icon)
+	elif delta_hp < 0:
+		for i in range(-delta_hp):
+			var hp_icon = hp_container.get_child(-1)
+			if hp_icon:
+				hp_icon.queue_free()
+ 
+func update_time():
+	var formatted_time = str(time)
+	var decimal_index = formatted_time.find(".")
 
 
 func get_input():

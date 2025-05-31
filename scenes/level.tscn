@@ -30,6 +30,8 @@ script = ExtResource("5_ppgk2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -50
-offset_right = 7007.0
-offset_bottom = 5921.0
+offset_left = -3251.0
+offset_top = -2296.0
+offset_right = 6998.0
+offset_bottom = 5925.0
 color = Color(0, 0, 0, 1)

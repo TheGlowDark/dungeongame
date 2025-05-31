@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://cjgqlio8rsrym" path="res://scenes/walk.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://de5ht43ws46sh" path="res://scenes/attack.gd" id="7_fjrip"]
 [ext_resource type="Script" uid="uid://cmnvv4t8wtymw" path="res://scenes/death.gd" id="7_ur7pv"]
-[ext_resource type="Script" uid="uid://c3s0wlmnfuh15" path="res://scenes/hurt.gd" id="8_smehm"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_smehm"]
 animation = &"death"
@@ -176,7 +175,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_jej6c"]
 resource_name = "hurt_left"
-length = 0.33
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -379,10 +377,17 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(9, 7)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_smehm"]
+size = Vector2(39, 24)
+
 [node name="Player" type="CharacterBody2D" groups=["Player", "player"]]
 z_index = 1
 script = ExtResource("1_qhqgy")
+speed = null
+start_position = null
 attack_speed_boost = 120
+hp_limit = null
+attack_cooldown = null
 health = 3
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -409,9 +414,14 @@ position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="weapon" parent="." instance=ExtResource("3_qhqgy")]
-position = Vector2(6, 2)
+position = Vector2(5, 2)
 collision_layer = 2
 collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="weapon"]
+visibility_layer = 3
+position = Vector2(4.5, -2)
+shape = SubResource("RectangleShape2D_smehm")
 
 [node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_dqkch")
@@ -429,5 +439,18 @@ script = ExtResource("7_ur7pv")
 [node name="attack" type="Node" parent="state_machine"]
 script = ExtResource("7_fjrip")
 
-[node name="hurt" type="Node" parent="state_machine"]
-script = ExtResource("8_smehm")
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HP" type="HBoxContainer" parent="UI"]
+offset_left = 24.0
+offset_top = 11.0
+offset_right = 64.0
+offset_bottom = 51.0
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI"]
+offset_left = 178.0
+offset_top = 3.0
+offset_right = 218.0
+offset_bottom = 26.0
+size_flags_horizontal = 4

@@ -1,6 +1,7 @@
 extends State
 
 @onready var enemy = $"../.."
+@onready var room = $"../../../"
 
 func enter():
 	enemy.animation_travel("idle")
@@ -8,13 +9,11 @@ func enter():
 func update(_delta):
 	if enemy.health <= 0:
 		state_transition.emit(self, "death")
-	enemy.update_animation(enemy.get_distance().normalized())
-	enemy.velocity = Vector2.ZERO
-#	if(enemy.get_distance().length() <= enemy.attack_distance):
+	enemy.update_animation(enemy.get_distance().normalized() * Vector2(1, -1))
+#	if(enemy.get_distance().length() <= enemy.attack_distance):d
 #		state_transition.emit(self, "attack")
-	if(enemy.get_player.global_position.distance_to(enemy.global_position) <= 256):
-		state_transition.emit(self, "walk")
 		
-	if(enemy.player_attack_check()):
-		enemy.velocity = Vector2.ZERO
+	if(enemy.player_attack_check() and enemy.attack_timer.timeout):
 		state_transition.emit(self, "attack")
+	else: 
+		state_transition.emit(self, "walk")

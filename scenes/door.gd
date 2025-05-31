@@ -11,14 +11,11 @@ func set_next_pos(vector):
 func get_next_pos():
 	return next_pos
 
-func _on_body_entered(body: Node):
+func _on_body_entered(body):
+	print(room.enemies_count)
 	if body is Player and room.clear_check():
-		var transition = Vector2.ZERO
+		#var transition = Vector2.ZERO
+		print("!!")
 		body.global_position = next_pos
-		#match side:
-			#0: player.
-			#1:
-			#2:
-			#3:
-		body.current_room += Vector2()
+
 #func _on_body_exited(body: Node):

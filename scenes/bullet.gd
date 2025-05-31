@@ -23,7 +23,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:  # Или body.is_in_group("player")
-		body.health -= 1
+		body._take_damage(1)
 		print(body.health)
 	if not body is Enemy: 
 		queue_free()  # Уничтожаем пулю после попадания

@@ -2,6 +2,7 @@ class_name character_base extends CharacterBody2D
  
 @onready var animation_tree:= $AnimationTree
 @onready var animation_state_machine = animation_tree["parameters/playback"] 
+@onready var get_player:= get_tree().get_nodes_in_group("player")[0]
 #@onready var animation_player = $AnimationTree.get("anim_player")
 @onready var sprite := $Sprite2D
 @export var health : int
@@ -22,7 +23,11 @@ func _take_damage(amount):
 	if invincible:
 		return
 	health -= amount
+	if self is Player: 
+		get_player.update_hp_icons()
 	damage_effects()
+	
+	
 
 func animation_travel(state: String):
 	if animation_state_machine != null:
