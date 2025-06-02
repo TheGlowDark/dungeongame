@@ -3,8 +3,8 @@ extends State
 @onready var enemy = $"../.."
 
 func enter():
-	if enemy.health <= 0:
-		state_transition.emit(self, "death")
+	#if enemy.health <= 0:
+		#state_transition.emit(self, "death")
 	
 	# Если игрок в зоне и можно атаковать
 	if enemy.player_attack_check() and enemy.can_attack:
@@ -19,6 +19,7 @@ func enter():
 func update(_delta: float):
 	if enemy.health <= 0:
 		state_transition.emit(self, "death")
+		return
 	#enemy.update_animation(enemy.get_distance().normalized() * Vector2(1, -1))
 	# Если таймер атаки закончился и игрок всё ещё в зоне
 	if enemy.attack_timer.is_stopped():

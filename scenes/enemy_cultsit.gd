@@ -5,21 +5,22 @@ class_name Enemy_cultist
 @onready var bulletspawnpoint = $bullletspawn
 @onready var bullet := preload("res://scenes/bullet.tscn")
 @onready var raycast = $ShapeCast2D
-@export var attack_delay = 1.6
+#@export var delay_time = 1.0
 
 
 func attack():
 	if can_attack and player_attack_check():
 		await get_tree().create_timer(attack_delay).timeout
-		var b = bullet.instantiate()
-		get_parent().get_parent().add_child(b)
-		can_attack = false
+		if(health > 0):
+			var b = bullet.instantiate()
+			get_parent().get_parent().add_child(b)
+			can_attack = false
 		# Устанавливаем позицию пули в позицию точки спавна
 		# Направление пули к игроку
-		b.global_position = bulletspawnpoint.global_position
-		var players = get_tree().get_nodes_in_group("player")
-		if players.size() > 0:
-			b.direction = (players[0].global_position - b.global_position).normalized()
+			b.global_position = bulletspawnpoint.global_position
+			var players = get_tree().get_nodes_in_group("player")
+			if players.size() > 0:
+				b.direction = (players[0].global_position - b.global_position).normalized()
 
 func _ready():
 	process_mode = PROCESS_MODE_DISABLED

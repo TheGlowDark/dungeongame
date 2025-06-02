@@ -35,7 +35,6 @@ class_name Enemy_butcher
 
 @onready var attack_timer = $attack_cooldown
 @export var attack_range = 24  # Радиус атаки
-@export var onready = 0.1
 var is_player_in_range = false  # Игрок в зоне атаки?
 
 #func _on_attack_range_body_entered(body: Node2D) -> void:
@@ -64,7 +63,7 @@ func attack():
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Player:
+	if body is Player and fsm.current_state != fsm.states.get("death"):
 		is_player_in_range = true  # Игрок вошёл в зону
 		fsm.change_state(fsm.current_state, "attack")  # Переход в состояние атаки
 

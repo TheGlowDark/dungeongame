@@ -1,7 +1,9 @@
+
 extends State
 
 @onready var player := $"../.."
 @onready var weapon := $"../../weapon"
+@onready var special_sword := preload("res://scenes/special_sword.tscn")
 @export var swing_durability = 0.5
 var is_dashing = false 
 @export var dashing_duration = 0.1
@@ -13,6 +15,8 @@ func enter():
 	player.can_attack = false
 	dashing_timer = dashing_duration
 	dash_direction = player.update_look_direction()
+		# Устанавливаем позицию пули в позицию точки спавна
+		# Направление пули к игроку
 	
 	#if player:
 		#player.animation_travel("attack")

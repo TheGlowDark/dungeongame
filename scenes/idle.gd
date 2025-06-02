@@ -17,8 +17,8 @@ func update(_delta):
 	#player.move_and_slide()
 	if Input.is_action_just_pressed("attack") and player.can_attack:
 		state_transition.emit(self, "attack")	
-	
 
+		
 func move(input_dir: Vector2, _delta: float):
 	player.velocity = input_dir * player.speed
 	# flipping sprite if needed

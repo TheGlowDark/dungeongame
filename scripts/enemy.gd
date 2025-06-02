@@ -8,6 +8,8 @@ class_name Enemy
 @onready var navagent = $NavigationAgent2D 
 @onready var room = $"../../"
 @export var damage = 1
+@export var attack_delay = 1.0
+
 var active = false
 
 var can_attack = true

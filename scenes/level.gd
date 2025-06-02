@@ -6,11 +6,12 @@ const ROOM_SIZE = 11    # Размер комнаты в тайлах (нече�
 const TILE_SIZE := 32  # Размер одного тайла в пикселях
 const ROOM_SIZE_PIXELS := ROOM_SIZE * TILE_SIZE  # Общий размер комнаты в пикселях
 
-const map_root := "res://rooms/normal_rooms/room"
-const start_root := "res://rooms/start_rooms/start_room"
+#const room_root := "res://rooms/normal_rooms/room"
+#const start_root := "res://rooms/start_rooms/room"
+#const exit_root := "res://rooms/exit_rooms/room"
 
-func get_room_path(cur_root, index: int):
-	return cur_root + str(index) + ".tscn"
+#func get_room_path(cur_root, index: int):
+	#return cur_root + str(index) + ".tscn"
 
 const map_number = 1
 
@@ -21,24 +22,29 @@ enum RoomType {EMPTY, NORMAL, START, BOSS, SECRET}
 
 var layout = []        # 2D массив типов комнат
 var rooms = {}         # Словарь позиций и данных комнат
-var room_pool = []
-var start_room_pool = []
+var room_pool 
+var start_room_pool
+var exit_room_pool 
 
 var start_position = Vector2(ROOM_SIZE_PIXELS * round(GRID_WIDTH/2) + ROOM_SIZE_PIXELS / 2,ROOM_SIZE_PIXELS * round(GRID_WIDTH/2) + ROOM_SIZE_PIXELS / 2)
 var start_room_pos = Vector2(6, 6)  # Центральная позиция
+var exit_room : Vector2
+
 
 func _ready():
 #	arrow_texture()
+	start_room_pool = get_parent().start_room_pool
+	room_pool = get_parent().room_pool
+	exit_room_pool = get_parent().exit_room_pool
 	$Camera2D.start()
 	randomize()
 	generate_paths()
 	print_layout()
-	get_room_array()
 	build_dungeon()
 	layout[start_room_pos.x][start_room_pos.y] *= -1
 	
 	#print(rooms)
-	$Player.position = start_position
+	#$Player.position = start_position
 	$Camera2D.position = start_position
 
 func build_dungeon():
@@ -53,6 +59,8 @@ func draw_room(y, x):
 	var s
 	if Vector2(y, x) == start_room_pos:
 		s = start_room_pool[0].instantiate()
+	elif Vector2(y, x) == exit_room:
+		s = exit_room_pool[randi_range(0, exit_room_pool.size()-1)].instantiate()
 	else:
 		s = room_pool[randi_range(0, room_pool.size()-1)].instantiate()
 	s.room_position = Vector2(y, x)
@@ -60,7 +68,7 @@ func draw_room(y, x):
 #wa	if layout[x][y] == RoomType.START:
 #		s.enter()
 	#var room = get_room_path(randi_range(0, map_number)).instantiate()
-	add_child(s) 
+	call_deferred("add_child", s) 
 	#наверх направо вниз налево
 	add_one_door(y - 1,x, ROOM_SIZE_PIXELS / 2, ROOM_SIZE_PIXELS - TILE_SIZE * 2, s, 0) #телепорт направо это середина от отсчета комнаты + 1 тайл (стены)
 	add_one_door(y, x + 1, TILE_SIZE * 2, ROOM_SIZE_PIXELS / 2, s,1) 
@@ -75,31 +83,18 @@ func add_one_door(y, x, add_x, add_y,s,n):
 	#Не путайте с условием из add_one_room - ЭТО ДРУГОЕ
 	if ((x >= 0) && (x < GRID_WIDTH) && (y >= 0) && (y < GRID_HEIGHT) && (layout[y][x] != RoomType.EMPTY)):
 		var d = preload("res://scenes/door.tscn").instantiate()
+#		d.frame = n
 		d.transform = s.get_child(n).transform
-		d.side = n
+#		d.door_rotate(n)
 		#Задали положение для телепорта
 		#Умножаем на размер комнаты
-		d.set_next_pos(Vector2(x*ROOM_SIZE_PIXELS+add_x,y*ROOM_SIZE_PIXELS+add_y))
-		s.add_child(d)
+		s.get_node("doors").call_deferred("add_child", d)
+		d.set_next_pos(Vector2(x*ROOM_SIZE_PIXELS+add_x,y*ROOM_SIZE_PIXELS+add_y), n, Vector2(y, x))
 	
 	
 
 
-func get_room_array():
-	start_room_pool.append(load(get_room_path(start_root, 0)))
-	#Счётчик
-	var i = 1
-	while true:
-		#Если такая сцена есть, то добавляем в массив
-		if load(get_room_path(map_root, i)) != null:
-			room_pool.append(load(get_room_path(map_root, i)))
-		#Иначе заканчиваем while
-		#У меня все комнаты идут по порядку(Room1,Room2...)
-		#Можно сделать чуть иначе, но так проще...
-		else:
-			break
-		i+=1
-
+		
 
 #func build_dungeon():
 	#for k in rooms:
@@ -215,15 +210,15 @@ func place_boss_room():
 	
 	# выбираем случайную комнату из кандидатов
 	if candidate_rooms.size() > 0:
-		var boss_pos = candidate_rooms[randi() % candidate_rooms.size()]
-		layout[boss_pos.x][boss_pos.y] = RoomType.BOSS
-		rooms[boss_pos].type = RoomType.BOSS
+		exit_room = candidate_rooms[randi() % candidate_rooms.size()]
+		layout[exit_room.x][exit_room.y] = RoomType.BOSS
+		rooms[exit_room].type = RoomType.BOSS
 		
 		# убедимся, что это конечная комната (удаляем все соединения кроме одного)
-		if rooms[boss_pos].connections.size() > 1:
+		if rooms[exit_room].connections.size() > 1:
 			# Оставляем только первое соединение
-			var main_connection = rooms[boss_pos].connections[0]
-			rooms[boss_pos].connections = [main_connection]
+			var main_connection = rooms[exit_room].connections[0]
+			rooms[exit_room].connections = [main_connection]
 
 # функция для вычисления расстояния по пути (количество комнат)
 func get_path_distance(from_pos, to_pos):

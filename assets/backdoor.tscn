@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0t82flemgfp6"]
+
+[ext_resource type="Script" uid="uid://cqor2f8qxklod" path="res://backdoor.gd" id="1_0vyny"]
+[ext_resource type="Texture2D" uid="uid://bl70r4jfpjsts" path="res://assets/map/backdoor.png" id="2_0vyny"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tgep7"]
+
+[sub_resource type="Animation" id="Animation_sum7p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_0vyny"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tgep7"]
+_data = {
+&"RESET": SubResource("Animation_sum7p"),
+&"open": SubResource("Animation_0vyny")
+}
+
+[node name="backdoor" type="Node2D"]
+script = ExtResource("1_0vyny")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0vyny")
+hframes = 3
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_tgep7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tgep7")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

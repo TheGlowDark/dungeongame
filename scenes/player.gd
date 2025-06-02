@@ -82,12 +82,18 @@ class_name Player
 @export var hp_limit = 3
 
 @onready var hp_container = $UI/HP
+@onready var uitime = $UI/time
 @onready var hp_icon_scene := preload("res://scenes/hp.tscn")
+var time = 0
+var minutes:= 0
+var seconds:= 0
+var mseconds:= 0
+
 
 var can_attack = true
 var is_alive = true
 var is_attack = false
-@onready var current_room = $"..".start_position
+#@onready var current_room = $"..".start_position
 @export var attack_cooldown := 0.5
 var attack_cooldown_timer = attack_cooldown
 
@@ -109,7 +115,7 @@ func _physics_process(_delta):
 		if attack_cooldown_timer <= 0:
 			can_attack = true
 			attack_cooldown_timer = attack_cooldown
-#	time = float(time) + _delta
+	time = float(time) + _delta
 	update_time()
 	#print(can_attack)
 	# StateMachine теперь управляет всем
@@ -117,6 +123,26 @@ func _physics_process(_delta):
 #	$state_machine._physics_process(delta)
 	move_and_slide()
 
+func update_floor():
+	$UI/Level/number.text = str(get_parent().current_level) 
+	
+	
+func hp_up(amount):
+	if(health < 3):
+		health += amount
+		update_hp_icons()
+	return health < 3
+
+
+func update_time():
+	mseconds = fmod(time, 1) * 100
+	seconds = fmod(time, 60)
+	minutes = fmod(time, 3600) / 60
+	$UI/time/minutes.text = "%02d:" % minutes
+	$UI/time/seconds.text = "%02d." % seconds
+	$UI/time/mseconds.text = "%03d" % mseconds
+	
+	 
 func update_hp_icons():
 	var hp_icons = hp_container.get_children()
 	var delta_hp = health - hp_icons.size()
@@ -129,10 +155,8 @@ func update_hp_icons():
 			var hp_icon = hp_container.get_child(-1)
 			if hp_icon:
 				hp_icon.queue_free()
- 
-func update_time():
-	var formatted_time = str(time)
-	var decimal_index = formatted_time.find(".")
+			
+
 
 
 func get_input():
@@ -151,8 +175,10 @@ func update_look_direction():
 	if look_direction.y < 0:  # Если смотрим вверх
 		$weapon.z_index = -1
 	else:
-		$weapon.z_index = 1
+		$weapon.z_index = 0
 	return look_direction
+
+		
 
 #func handle_movement(delta):
 	#if input_vector != Vector2.ZERO:

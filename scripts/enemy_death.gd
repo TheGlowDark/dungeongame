@@ -7,4 +7,6 @@ func enter():
 	enemy.update_animation(enemy.get_distance().normalized() * Vector2(1, -1))
 	enemy.animation_travel("death")
 	enemy.room.enemies_count -= 1
+	enemy.room.clear_check()
+	await get_tree().create_timer(5).timeout
 	enemy._die()

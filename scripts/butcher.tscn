@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://d2cfignlvplex"]
+[gd_scene load_steps=73 format=3 uid="uid://d2cfignlvplex"]
 
 [ext_resource type="Script" uid="uid://yhp3m1nopmiv" path="res://scripts/enemy_butcher.gd" id="1_xngwu"]
 [ext_resource type="Texture2D" uid="uid://cv68qhftchmfw" path="res://assets/textures/enemies/butcher/butcher1.png" id="2_imh4p"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://341ik3peqgwd" path="res://scenes/start.gd" id="10_21y2r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cb6f2"]
-size = Vector2(22, 23)
+size = Vector2(18, 23)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gqgfl"]
 animation = &"attack_left"
@@ -174,6 +174,9 @@ advance_mode = 0
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0motp"]
 advance_mode = 0
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_21y2r"]
+advance_mode = 0
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_u5222"]
 states/Start/position = Vector2(121, 111)
 states/attack/node = SubResource("AnimationNodeBlendSpace2D_miwvq")
@@ -183,10 +186,11 @@ states/death/position = Vector2(736, 32)
 states/hurt/node = SubResource("AnimationNodeBlendSpace2D_xbor1")
 states/hurt/position = Vector2(550, 233)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_dvlbs")
-states/idle/position = Vector2(406, 100)
+states/idle/position = Vector2(386, 100)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_bcjmo")
 states/walk/position = Vector2(193, 212)
-transitions = ["walk", "attack", SubResource("AnimationNodeStateMachineTransition_hgyi7"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_l06os"), "attack", "hurt", SubResource("AnimationNodeStateMachineTransition_ytd26"), "walk", "hurt", SubResource("AnimationNodeStateMachineTransition_ie1m3"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_jnu8q"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_q145h"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_p6j80"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_gqgfl"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_2nb7p"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_ohs8l"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_u5222"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_0motp")]
+transitions = ["walk", "attack", SubResource("AnimationNodeStateMachineTransition_hgyi7"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_l06os"), "attack", "hurt", SubResource("AnimationNodeStateMachineTransition_ytd26"), "walk", "hurt", SubResource("AnimationNodeStateMachineTransition_ie1m3"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_jnu8q"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_q145h"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_p6j80"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_gqgfl"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_2nb7p"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_ohs8l"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_u5222"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_0motp"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_21y2r")]
+graph_offset = Vector2(22, 69)
 
 [sub_resource type="Animation" id="Animation_m46wk"]
 length = 0.001
@@ -552,18 +556,21 @@ _data = {
 size = Vector2(12, 14)
 
 [node name="butcher" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_xngwu")
 speed = 150
-health = 1
+health = 2
+stun_time = 10.0
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="Attack_area" type="CollisionShape2D" parent="Area2D"]
 light_mask = 2
 visibility_layer = 2
-position = Vector2(0, 0.5)
+position = Vector2(-2, 0.5)
 shape = SubResource("RectangleShape2D_cb6f2")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

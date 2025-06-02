@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=4 uid="uid://cquhl5ntemdc"]
+
+[ext_resource type="Script" uid="uid://bye5f4mqcsr34" path="res://rooms/room.gd" id="1_lrbqd"]
+[ext_resource type="TileSet" uid="uid://mgvftwj7kt5q" path="res://scenes/level.tres" id="2_wy3j3"]
+[ext_resource type="PackedScene" uid="uid://bhkj1xlqrsck2" path="res://scenes/enemy_cultsit.tscn" id="3_v5s05"]
+[ext_resource type="PackedScene" uid="uid://d2cfignlvplex" path="res://scripts/butcher.tscn" id="4_hnf67"]
+[ext_resource type="PackedScene" uid="uid://c0t82flemgfp6" path="res://scenes/backdoor.tscn" id="5_wy3j3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4tch"]
+size = Vector2(287, 292)
+
+[node name="room1" type="Node2D"]
+script = ExtResource("1_lrbqd")
+
+[node name="door1" type="Marker2D" parent="."]
+position = Vector2(172, 20)
+
+[node name="door2" type="Marker2D" parent="."]
+position = Vector2(327, 181)
+
+[node name="door3" type="Marker2D" parent="."]
+position = Vector2(177, 334)
+
+[node name="door4" type="Marker2D" parent="."]
+position = Vector2(26, 179)
+
+[node name="floor" type="TileMapLayer" parent="."]
+z_index = -1
+position = Vector2(160, 192)
+tile_map_data = PackedByteArray("AAD/////AAADAAUAAAAAAP//AAAAAAUAAAAAAAAAAAAAAAUAAAD//wAAAAACAAQAAAD+//7/AAACAAQAAAD///7/AAAAAAUAAAAAAP7/AAAAAAUAAAABAP7/AAAAAAUAAAABAP//AAAAAAUAAAABAAAAAAAAAAUAAAD//wEAAAABAAQAAAD+/wAAAAAAAAUAAAD+////AAAAAAUAAAD+/wEAAAAAAAUAAAAAAAEAAAABAAUAAAABAAEAAAADAAUAAAD9//3/AAABAAQAAAD+//3/AAAAAAUAAAD///3/AAAAAAUAAAAAAP3/AAAAAAUAAAABAP3/AAADAAQAAAACAP3/AAAAAAUAAAACAP7/AAABAAQAAAACAP//AAAAAAUAAAACAAAAAAAAAAUAAAACAAEAAAABAAUAAAACAAIAAAAAAAUAAAABAAIAAAADAAQAAAAAAAIAAAAAAAUAAAD//wIAAAAAAAUAAAD+/wIAAAACAAUAAAD9/wAAAAAAAAUAAAD9////AAABAAQAAAD9//7/AAABAAUAAAD9/wEAAAAAAAUAAAD9/wIAAAAAAAUAAAADAPz/AAADAAUAAAADAP3/AAADAAQAAAADAP7/AAAAAAUAAAADAP//AAAAAAUAAAADAAAAAAAAAAUAAAADAAEAAAAAAAUAAAADAAIAAAAAAAUAAAADAAMAAAADAAQAAAACAAMAAAACAAQAAAABAAMAAAABAAQAAAAAAAMAAAAAAAQAAAD8/wIAAAAAAAUAAAD//wMAAAAAAAUAAAD+/wMAAAAAAAUAAAD9/wMAAAAAAAUAAAD8/wMAAAAAAAUAAAD8/wAAAAADAAUAAAD8////AAAAAAQAAAD8//7/AAAAAAUAAAD8//3/AAAAAAUAAAD8//z/AAAAAAUAAAD8/wEAAAAAAAUAAAD9//z/AAACAAUAAAD+//z/AAAAAAQAAAD///z/AAAAAAUAAAAAAPz/AAAAAAUAAAABAPz/AAABAAUAAAACAPz/AAAAAAUAAAD8//v/AAAAAAUAAAD9//v/AAABAAQAAAD+//v/AAAAAAUAAAD///v/AAAAAAUAAAAAAPv/AAAAAAQAAAABAPv/AAAAAAUAAAACAPv/AAAAAAUAAAADAPv/AAADAAQAAAAEAPv/AAAAAAQAAAAEAPz/AAAAAAUAAAAEAP3/AAAAAAQAAAAEAP7/AAADAAUAAAAEAP//AAAAAAQAAAAEAAAAAAAAAAQAAAAEAAEAAAAAAAQAAAAEAAIAAAACAAQAAAAEAAMAAAAAAAQAAAA=")
+tile_set = ExtResource("2_wy3j3")
+rendering_quadrant_size = 32
+
+[node name="walls" type="TileMapLayer" parent="."]
+visibility_layer = 3
+z_index = 1
+y_sort_enabled = true
+position = Vector2(160, 192)
+tile_map_data = PackedByteArray("AAD9//r/AAABAAIAAAD+//r/AAABAAIAAAD///r/AAABAAIAAAAAAPr/AAABAAIAAAABAPr/AAABAAIAAAACAPr/AAABAAIAAAADAPr/AAABAAIAAAAEAPr/AAABAAIAAAAEAAQAAAABAAIAAAADAAQAAAABAAIAAAACAAQAAAABAAIAAAABAAQAAAABAAIAAAAAAAQAAAABAAIAAAD//wQAAAABAAIAAAD+/wQAAAABAAIAAAD9/wQAAAABAAIAAAD8/wQAAAABAAIAAAD8//r/AAABAAIAAAAFAPr/AAACAAAAAAAFAPv/AAACAAEAAAAFAPz/AAACAAEAAAAFAP3/AAACAAEAAAAFAP7/AAACAAEAAAAFAP//AAACAAEAAAAFAAAAAAACAAEAAAAFAAEAAAACAAEAAAAFAAIAAAACAAEAAAAFAAMAAAACAAEAAAAFAAQAAAACAAIAAAD7//z/AAAAAAEAAAD7//3/AAAAAAEAAAD7//7/AAAAAAEAAAD7////AAAAAAEAAAD7/wAAAAAAAAEAAAD7/wEAAAAAAAEAAAD7/wIAAAAAAAEAAAD7/wMAAAAAAAEAAAD7/wQAAAAAAAIAAAD7//v/AAAAAAEAAAD7//r/AAAAAAAAAAD+////AAAAAAIAAAD+//7/AAAAAAEAAAD/////AAABAAIAAAAAAP//AAABAAIAAAAAAAAAAAADAAIAAAABAP//AAABAAIAAAA=")
+tile_set = ExtResource("2_wy3j3")
+
+[node name="frontwalls" type="TileMapLayer" parent="."]
+light_mask = 3
+visibility_layer = 3
+z_index = 100
+position = Vector2(160, 192)
+tile_map_data = PackedByteArray("AAD8/wQAAAABAAIAAAD9/wQAAAABAAIAAAD+/wQAAAABAAIAAAD//wQAAAABAAIAAAAAAAQAAAABAAIAAAABAAQAAAABAAIAAAACAAQAAAABAAIAAAADAAQAAAABAAIAAAAEAAQAAAABAAIAAAA=")
+tile_set = ExtResource("2_wy3j3")
+
+[node name="Enemies" type="Node2D" parent="."]
+process_mode = 3
+
+[node name="Enemy_cultsit" parent="Enemies" instance=ExtResource("3_v5s05")]
+position = Vector2(220, 114)
+
+[node name="butcher" parent="Enemies" instance=ExtResource("4_hnf67")]
+position = Vector2(216, 74)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = 250
+offset_right = 337.0
+offset_bottom = 352.0
+color = Color(0, 0, 0, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(176.5, 175)
+shape = SubResource("RectangleShape2D_g4tch")
+
+[node name="doors" type="Node2D" parent="."]
+
+[node name="backdoor" parent="doors" instance=ExtResource("5_wy3j3")]
+position = Vector2(77, 69)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

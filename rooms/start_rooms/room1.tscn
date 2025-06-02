@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=4 uid="uid://q3ndjvre4iap"]
+
+[ext_resource type="Script" uid="uid://1hj4j74e1dam" path="res://scripts/room.gd" id="1_ohgxn"]
+[ext_resource type="TileSet" uid="uid://mgvftwj7kt5q" path="res://scenes/level.tres" id="2_ohgxn"]
+[ext_resource type="PackedScene" uid="uid://2xtgh64nr5fp" path="res://scenes/begin_input_help.tscn" id="3_ohgxn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4tch"]
+size = Vector2(287, 292)
+
+[node name="start_room" type="Node2D"]
+script = ExtResource("1_ohgxn")
+
+[node name="door1" type="Marker2D" parent="."]
+position = Vector2(176, 20)
+
+[node name="door2" type="Marker2D" parent="."]
+position = Vector2(315, 176)
+
+[node name="door3" type="Marker2D" parent="."]
+position = Vector2(176, 340)
+
+[node name="door4" type="Marker2D" parent="."]
+position = Vector2(37, 176)
+
+[node name="floor" type="TileMapLayer" parent="."]
+z_index = -1
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(160, 192)
+tile_map_data = PackedByteArray("AAD/////AAAAAAUAAAAAAP//AAAAAAUAAAAAAAAAAAADAAQAAAD//wAAAAACAAQAAAD+//7/AAAAAAUAAAD///7/AAAAAAUAAAAAAP7/AAAAAAUAAAABAP7/AAAAAAQAAAABAP//AAAAAAUAAAABAAAAAAADAAQAAAD//wEAAAACAAQAAAD+/wAAAAAAAAUAAAD+////AAAAAAUAAAD+/wEAAAAAAAUAAAAAAAEAAAADAAUAAAABAAEAAAACAAQAAAD9//3/AAAAAAUAAAD+//3/AAAAAAUAAAD///3/AAACAAQAAAAAAP3/AAAAAAUAAAABAP3/AAABAAQAAAACAP3/AAABAAUAAAACAP7/AAAAAAUAAAACAP//AAAAAAUAAAACAAAAAAAAAAUAAAACAAEAAAAAAAUAAAACAAIAAAADAAUAAAABAAIAAAAAAAUAAAAAAAIAAAAAAAUAAAD//wIAAAAAAAUAAAD+/wIAAAADAAUAAAD9/wAAAAABAAQAAAD9////AAAAAAUAAAD9//7/AAAAAAUAAAD9/wEAAAAAAAUAAAD9/wIAAAADAAUAAAADAPz/AAAAAAUAAAADAP3/AAAAAAUAAAADAP7/AAAAAAUAAAADAP//AAAAAAUAAAADAAAAAAAAAAUAAAADAAEAAAAAAAUAAAADAAIAAAAAAAUAAAADAAMAAAAAAAUAAAACAAMAAAAAAAUAAAABAAMAAAACAAQAAAAAAAMAAAAAAAUAAAD8/wIAAAACAAQAAAD//wMAAAAAAAUAAAD+/wMAAAACAAUAAAD9/wMAAAAAAAUAAAD8/wMAAAAAAAUAAAD8/wAAAAAAAAUAAAD8////AAAAAAQAAAD8//7/AAAAAAUAAAD8//3/AAADAAQAAAD8//z/AAAAAAUAAAD8/wEAAAAAAAUAAAD9//z/AAAAAAUAAAD+//z/AAAAAAUAAAD///z/AAAAAAUAAAAAAPz/AAAAAAQAAAABAPz/AAAAAAUAAAACAPz/AAAAAAUAAAD8//v/AAADAAQAAAD9//v/AAAAAAUAAAD+//v/AAAAAAUAAAD///v/AAAAAAUAAAAAAPv/AAAAAAUAAAABAPv/AAABAAQAAAACAPv/AAACAAUAAAADAPv/AAAAAAUAAAAEAPv/AAAAAAUAAAAEAPz/AAAAAAUAAAAEAP3/AAAAAAUAAAAEAP7/AAAAAAUAAAAEAP//AAAAAAUAAAAEAAAAAAADAAQAAAAEAAEAAAAAAAUAAAAEAAIAAAAAAAUAAAAEAAMAAAAAAAUAAAA=")
+tile_set = ExtResource("2_ohgxn")
+rendering_quadrant_size = 32
+
+[node name="walls" type="TileMapLayer" parent="."]
+visibility_layer = 3
+z_index = 1
+y_sort_enabled = true
+position = Vector2(160, 192)
+tile_map_data = PackedByteArray("AAD9//r/AAABAAIAAAD+//r/AAABAAIAAAD///r/AAABAAIAAAAAAPr/AAABAAIAAAABAPr/AAABAAIAAAACAPr/AAABAAIAAAADAPr/AAABAAIAAAAEAPr/AAABAAIAAAAEAAQAAAABAAIAAAADAAQAAAABAAIAAAACAAQAAAABAAIAAAABAAQAAAABAAIAAAAAAAQAAAABAAIAAAD//wQAAAABAAIAAAD+/wQAAAABAAIAAAD9/wQAAAABAAIAAAD8/wQAAAABAAIAAAD8//r/AAABAAIAAAAFAPr/AAACAAAAAAAFAAQAAAACAAIAAAD7//z/AAAAAAEAAAD7//3/AAAAAAEAAAD7//7/AAAAAAEAAAD7////AAAAAAEAAAD7/wAAAAAAAAEAAAD7/wEAAAAAAAEAAAD7/wIAAAAAAAEAAAD7/wMAAAAAAAEAAAD7/wQAAAAAAAIAAAD7//v/AAAAAAEAAAD7//r/AAAAAAAAAAAFAPv/AAACAAEAAAAFAPz/AAACAAEAAAAFAP3/AAACAAEAAAAFAP7/AAACAAEAAAAFAP//AAACAAEAAAAFAAAAAAACAAEAAAAFAAEAAAACAAEAAAAFAAIAAAACAAEAAAAFAAMAAAACAAEAAAA=")
+tile_set = ExtResource("2_ohgxn")
+
+[node name="frontwalls" type="TileMapLayer" parent="."]
+light_mask = 3
+visibility_layer = 3
+z_index = 100
+position = Vector2(160, 192)
+tile_map_data = PackedByteArray("AAD8/wQAAAABAAIAAAD9/wQAAAABAAIAAAD+/wQAAAABAAIAAAD//wQAAAABAAIAAAAAAAQAAAABAAIAAAABAAQAAAABAAIAAAACAAQAAAABAAIAAAADAAQAAAABAAIAAAAEAAQAAAABAAIAAAA=")
+tile_set = ExtResource("2_ohgxn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(176.5, 175)
+shape = SubResource("RectangleShape2D_g4tch")
+
+[node name="doors" type="Node2D" parent="."]
+
+[node name="Begin" parent="." instance=ExtResource("3_ohgxn")]
+z_index = -10
+position = Vector2(176, 208)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
