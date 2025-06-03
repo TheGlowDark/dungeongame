@@ -3,5 +3,4 @@
 [ext_resource type="Texture2D" uid="uid://dvsd2extm54xi" path="res://assets/textures/begin.png" id="1_rditp"]
 
 [node name="Begin" type="Sprite2D"]
-position = Vector2(1, 48)
 texture = ExtResource("1_rditp")

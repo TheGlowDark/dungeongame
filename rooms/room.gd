@@ -8,6 +8,7 @@ func hp_drop():
 	if randi_range(1, 100) <= hp_chance_drop:
 		var h = heart.instantiate()
 		dropped_items.add_child(h)
+		h.appear()
 
 func _ready():
 	enemies_count = enemies_list.get_child_count()

@@ -16,7 +16,7 @@ func enter():
 	#else:
 
 func update(_delta: float):
-	enemy.update_animation(enemy.get_distance().normalized() * Vector2(1, -1))
+	enemy.update_animation(enemy.get_distance().normalized())
 	if enemy.health <= 0:
 		state_transition.emit(self, "death")
 		return

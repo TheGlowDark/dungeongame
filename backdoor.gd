@@ -12,6 +12,6 @@ func open():
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player and is_open:
-		body.map.initializate()
 		game.generate_new_level()
+		#body.map.initializate()
 		

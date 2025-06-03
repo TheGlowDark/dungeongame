@@ -22,7 +22,7 @@ func attack():
 			if players.size() > 0:
 				b.direction = (players[0].global_position - b.global_position).normalized()
 
-func _ready():
+func _ready():	
 	process_mode = PROCESS_MODE_DISABLED
 	fsm.process_mode = PROCESS_MODE_DISABLED
 	animation_tree.active = true

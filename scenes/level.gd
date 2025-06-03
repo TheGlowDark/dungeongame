@@ -15,8 +15,8 @@ const ROOM_SIZE_PIXELS := ROOM_SIZE * TILE_SIZE  # Общий размер ко�
 
 const map_number = 1
 
-const TARGET_ROOM_COUNT = 15  # Фиксированное количество комнат
-const MIN_BOSS_DISTANCE = 6   # Минимальное расстояние от старта до босса
+@export var TARGET_ROOM_COUNT = 5  # Фиксированное количество комнат
+#const MIN_BOSS_DISTANCE = 6   # Минимальное расстояние от старта до босса
 
 enum RoomType {EMPTY, NORMAL, START, BOSS, SECRET}
 
@@ -30,8 +30,10 @@ var start_position = Vector2(ROOM_SIZE_PIXELS * round(GRID_WIDTH/2) + ROOM_SIZE_
 var start_room_pos = Vector2(6, 6)  # Центральная позиция
 var exit_room : Vector2
 
+@onready var map = $"../Player/UI/map"
 
 func _ready():
+	TARGET_ROOM_COUNT += Global.Room_add
 #	arrow_texture()
 	start_room_pool = get_parent().start_room_pool
 	room_pool = get_parent().room_pool
@@ -41,7 +43,8 @@ func _ready():
 	generate_paths()
 	print_layout()
 	build_dungeon()
-	layout[start_room_pos.x][start_room_pos.y] *= -1
+	map.initializate(layout)
+	#layout[start_room_pos.x][start_room_pos.y] *= -1
 	
 	#print(rooms)
 	#$Player.position = start_position
@@ -59,6 +62,7 @@ func draw_room(y, x):
 	var s
 	if Vector2(y, x) == start_room_pos:
 		s = start_room_pool[0].instantiate()
+		s.ready()
 	elif Vector2(y, x) == exit_room:
 		s = exit_room_pool[randi_range(0, exit_room_pool.size()-1)].instantiate()
 	else:
@@ -70,10 +74,10 @@ func draw_room(y, x):
 	#var room = get_room_path(randi_range(0, map_number)).instantiate()
 	call_deferred("add_child", s) 
 	#наверх направо вниз налево
-	add_one_door(y - 1,x, ROOM_SIZE_PIXELS / 2, ROOM_SIZE_PIXELS - TILE_SIZE * 2, s, 0) #телепорт направо это середина от отсчета комнаты + 1 тайл (стены)
-	add_one_door(y, x + 1, TILE_SIZE * 2, ROOM_SIZE_PIXELS / 2, s,1) 
-	add_one_door(y + 1, x, ROOM_SIZE_PIXELS / 2, TILE_SIZE * 2,s,2)
-	add_one_door(y,x - 1,ROOM_SIZE_PIXELS - TILE_SIZE * 2, ROOM_SIZE_PIXELS / 2,s,3)
+	add_one_door(y - 1,x, ROOM_SIZE_PIXELS / 2, ROOM_SIZE_PIXELS - TILE_SIZE - 4, s, 0) #телепорт направо это середина от отсчета комнаты + 1 тайл (стены)
+	add_one_door(y, x + 1, TILE_SIZE + 12, ROOM_SIZE_PIXELS / 2, s,1) 
+	add_one_door(y + 1, x, ROOM_SIZE_PIXELS / 2, TILE_SIZE + 8,s,2)
+	add_one_door(y,x - 1,ROOM_SIZE_PIXELS - TILE_SIZE - 12, ROOM_SIZE_PIXELS / 2,s,3)
 	
 
 func add_one_door(y, x, add_x, add_y,s,n):

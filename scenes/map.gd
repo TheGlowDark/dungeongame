@@ -2,7 +2,7 @@ extends GridContainer
 
 # Настройки матрицы
 @export var grid_size := Vector2.ZERO
-@export var cell_size := Vector2(3, 3)
+@export var cell_size := Vector2(5, 5)
 @export var unvisited := Color.GRAY
 @export var visited := Color.YELLOW
 @export var current := Color.ORANGE
@@ -19,10 +19,10 @@ func _ready():
 	add_theme_constant_override("hseparation", 0)  # Горизонтальные отступы
 	add_theme_constant_override("vseparation", 0)  # Вертикальные отступы
 
-func initializate():
+func initializate(l):
 	clear_matrix()
 	var level = get_tree().root.get_child(1).get_child(1)
-	layout = level.layout
+	layout = l
 	grid_size.x = level.GRID_WIDTH
 	grid_size.y = level.GRID_HEIGHT
 	first_room = level.start_room_pos
@@ -82,4 +82,5 @@ func check_neighbours(pos: Vector2):
 func clear_matrix():
 	for y in range(grid_size.y):
 		for x in range(grid_size.x):
-			matrix[y][x].color = clear
+			matrix[x][y].color = clear
+	cur_pivot = Vector2.ZERO

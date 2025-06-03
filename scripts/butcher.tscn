@@ -402,6 +402,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_jnu8q"]
 resource_name = "idle_down"
 length = 0.4
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -418,6 +419,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_ytd26"]
 resource_name = "idle_left"
 length = 0.4
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -434,6 +436,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_ie1m3"]
 resource_name = "idle_right"
 length = 0.4
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -450,6 +453,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_q145h"]
 resource_name = "idle_up"
 length = 0.4
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -466,6 +470,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_hosmv"]
 resource_name = "walk_down"
 length = 0.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -482,6 +487,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_53llk"]
 resource_name = "walk_left"
 length = 0.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -498,6 +504,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_cdia0"]
 resource_name = "walk_right"
 length = 0.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -514,6 +521,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_u5wub"]
 resource_name = "walk_up"
 length = 0.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -561,7 +569,6 @@ y_sort_enabled = true
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_xngwu")
-speed = 150
 health = 2
 stun_time = 10.0
 

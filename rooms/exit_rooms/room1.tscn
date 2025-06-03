@@ -16,13 +16,13 @@ script = ExtResource("1_lrbqd")
 position = Vector2(172, 20)
 
 [node name="door2" type="Marker2D" parent="."]
-position = Vector2(327, 181)
+position = Vector2(343, 181)
 
 [node name="door3" type="Marker2D" parent="."]
 position = Vector2(177, 334)
 
 [node name="door4" type="Marker2D" parent="."]
-position = Vector2(26, 179)
+position = Vector2(10, 179)
 
 [node name="floor" type="TileMapLayer" parent="."]
 z_index = -1
@@ -57,7 +57,6 @@ position = Vector2(220, 114)
 position = Vector2(216, 74)
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 z_index = 250
 z_as_relative = false
 offset_right = 337.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://pe4vu6hw1tvk"]
+[gd_scene load_steps=53 format=3 uid="uid://pe4vu6hw1tvk"]
 
 [ext_resource type="Script" uid="uid://d4las3x5qgykk" path="res://scenes/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://bp42u7gpigdkt" path="res://assets/textures/waxhero.png" id="2_smehm"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://de5ht43ws46sh" path="res://scenes/attack.gd" id="7_fjrip"]
 [ext_resource type="Script" uid="uid://cmnvv4t8wtymw" path="res://scenes/death.gd" id="7_ur7pv"]
 [ext_resource type="Script" uid="uid://dbgalr8tyne3g" path="res://scenes/map.gd" id="9_ur7pv"]
+[ext_resource type="LabelSettings" uid="uid://drjup7xhkr1x0" path="res://assets/fonts/new_label_settings.tres" id="9_y4r1p"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_smehm"]
 animation = &"death"
@@ -441,8 +442,9 @@ script = ExtResource("7_fjrip")
 
 [node name="HP" type="HBoxContainer" parent="UI"]
 offset_left = 10.0
+offset_top = 2.0
 offset_right = 37.0
-offset_bottom = 27.0
+offset_bottom = 29.0
 theme_override_constants/separation = 20
 
 [node name="time" type="HBoxContainer" parent="UI"]
@@ -457,15 +459,18 @@ alignment = 2
 layout_mode = 2
 size_flags_horizontal = 4
 text = "00:"
+label_settings = ExtResource("9_y4r1p")
 horizontal_alignment = 1
 
 [node name="seconds" type="Label" parent="UI/time"]
 layout_mode = 2
 text = "00:"
+label_settings = ExtResource("9_y4r1p")
 
 [node name="mseconds" type="Label" parent="UI/time"]
 layout_mode = 2
 text = "000"
+label_settings = ExtResource("9_y4r1p")
 
 [node name="Level" type="HBoxContainer" parent="UI"]
 offset_left = 80.0
@@ -477,9 +482,11 @@ size_flags_horizontal = 8
 [node name="Floor" type="Label" parent="UI/Level"]
 layout_mode = 2
 text = "Floor"
+label_settings = ExtResource("9_y4r1p")
 
 [node name="number" type="Label" parent="UI/Level"]
 layout_mode = 2
+label_settings = ExtResource("9_y4r1p")
 vertical_alignment = 3
 
 [node name="map" type="GridContainer" parent="UI"]

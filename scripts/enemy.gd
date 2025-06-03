@@ -1,7 +1,8 @@
 extends character_base
 class_name Enemy
 @export var attack_distance = 128
-@export var speed = 100
+@export var speed_base = 100
+var speed = speed_base
 @onready var fsm = $state_machine
 @onready var animation_player = $AnimationPlayer
 @export var attack_cooldown = 2.0
@@ -20,6 +21,7 @@ func play_animation(s):
 	await animation_player.animation_finished
 
 func _ready():
+	speed = speed_base * Global.dif_multiplier
 #	process_mode = PROCESS_MODE_DISABLED
 #	fsm.process_mode = PROCESS_MODE_DISABLED
 	animation_tree.active = true

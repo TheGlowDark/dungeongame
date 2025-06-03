@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cagap1hijytnr"]
+[gd_scene load_steps=7 format=3 uid="uid://cagap1hijytnr"]
 
 [ext_resource type="Texture2D" uid="uid://bsr514pue6vcw" path="res://assets/textures/ui/heart.png" id="1_ycbwg"]
 [ext_resource type="Script" uid="uid://bxkmciw1drulb" path="res://heart.gd" id="2_krgnv"]
@@ -23,7 +23,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ycbwg"]
 resource_name = "appear"
-length = 0.9
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -37,37 +36,18 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_txm48"]
-resource_name = "idle"
-length = 1.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [8, 9, 10, 11]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_txm48"]
 _data = {
 &"RESET": SubResource("Animation_krgnv"),
-&"appear": SubResource("Animation_ycbwg"),
-&"idle": SubResource("Animation_txm48")
+&"appear": SubResource("Animation_ycbwg")
 }
 
 [node name="heart" type="Sprite2D"]
-z_index = 5
 texture = ExtResource("1_ycbwg")
 hframes = 8
-vframes = 2
 frame = 7
 script = ExtResource("2_krgnv")
+amount = null
 
 [node name="Area2D" type="Area2D" parent="."]
 
