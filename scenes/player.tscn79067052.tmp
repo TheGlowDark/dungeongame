@@ -440,16 +440,15 @@ script = ExtResource("7_fjrip")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HP" type="HBoxContainer" parent="UI"]
-offset_left = 10.0
-offset_right = 37.0
+offset_right = 27.0
 offset_bottom = 27.0
 theme_override_constants/separation = 20
 
 [node name="time" type="HBoxContainer" parent="UI"]
-offset_left = 337.0
-offset_top = 7.0
-offset_right = 416.0
-offset_bottom = 30.0
+offset_left = 347.0
+offset_top = 6.0
+offset_right = 426.0
+offset_bottom = 29.0
 theme_override_constants/separation = 0
 alignment = 2
 
@@ -468,9 +467,9 @@ layout_mode = 2
 text = "000"
 
 [node name="Level" type="HBoxContainer" parent="UI"]
-offset_left = 80.0
+offset_left = 70.0
 offset_top = 6.0
-offset_right = 129.0
+offset_right = 119.0
 offset_bottom = 29.0
 size_flags_horizontal = 8
 
@@ -484,9 +483,9 @@ vertical_alignment = 3
 
 [node name="map" type="GridContainer" parent="UI"]
 unique_name_in_owner = true
-offset_left = 335.0
+offset_left = 353.0
 offset_top = 31.0
-offset_right = 375.0
+offset_right = 393.0
 offset_bottom = 71.0
 size_flags_horizontal = 8
 script = ExtResource("9_ur7pv")

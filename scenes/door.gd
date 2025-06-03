@@ -41,6 +41,8 @@ func _on_body_entered(body):
 	if body is Player and is_open:
 		#var transition = Vector2.ZERO
 		print("!!")
+		body.map.update(next_room)
 		body.global_position = next_pos
+		
 
 #func _on_body_exited(body: Node):

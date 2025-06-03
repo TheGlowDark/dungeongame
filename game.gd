@@ -12,6 +12,8 @@ var start_room_pool = []
 var exit_room_pool = []
 
 @onready var player = $Player
+@onready var map = $"Player/UI/map"
+
 func get_room_path(cur_root, index: int):
 	return cur_root + str(index) + ".tscn"
 	
@@ -29,7 +31,7 @@ func _ready():
 	get_room_array(exit_root, exit_room_pool)
 	get_room_array(start_root, start_room_pool)
 	generate_new_level()
-	
+
 func generate_new_level():
 	if current_dungeon:
 		current_dungeon.queue_free()
@@ -39,6 +41,7 @@ func generate_new_level():
 	# Явно устанавливаем позицию игрока после создания нового уровня
 	player.position = current_dungeon.start_position
 	player.update_floor()
+	map.initializate()
 	#$Camera2D.position = current_dungeon.start_position
 	
 	current_level += 1  # Увеличиваем уровень ПОСЛЕ инициализации

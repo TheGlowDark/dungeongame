@@ -83,6 +83,7 @@ class_name Player
 
 @onready var hp_container = $UI/HP
 @onready var uitime = $UI/time
+@onready var map = %map
 @onready var hp_icon_scene := preload("res://scenes/hp.tscn")
 var time = 0
 var minutes:= 0
