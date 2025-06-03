@@ -1,9 +1,9 @@
 extends Node
 
-var dif_multiplier = 1.5
-var current_level = 1  
+var dif_multiplier = 1.1
+var current_level = 1
 
-var level_up_counter = 0
+var level_up_counter = 1
 
 #@export var butcher_speed_base = 120
 #@export var cultist_speed_base = 50

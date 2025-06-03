@@ -5,11 +5,14 @@ extends State
 @onready var weapon := $"../../weapon"
 @onready var special_sword := preload("res://scenes/special_sword.tscn")
 @export var swing_durability = 0.5
+@export var sound: AudioStreamWAV
+
 var is_dashing = false 
 @export var dashing_duration = 0.1
 var dashing_timer = dashing_duration
 @onready var dash_direction: Vector2
 func enter():
+	AudioManager.play_sound(sound, 0, 0.2)
 	player.is_attack = true
 	weapon.attack()
 	player.can_attack = false

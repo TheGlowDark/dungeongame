@@ -12,7 +12,6 @@ var matrix = []
 var cur_pivot = Vector2.ZERO
 var layout
 
-
 func _ready():
 #	add_theme_constant_override("hseparation", 0)  # Горизонтальный промежуток
 #	add_theme_constant_override("vseparation", 0)  # Вертикальный промежуток
@@ -20,8 +19,9 @@ func _ready():
 	add_theme_constant_override("vseparation", 0)  # Вертикальные отступы
 
 func initializate(l):
+	
 	clear_matrix()
-	var level = get_tree().root.get_child(1).get_child(1)
+	var level = get_tree().root.get_child(2).get_child(2)
 	layout = l
 	grid_size.x = level.GRID_WIDTH
 	grid_size.y = level.GRID_HEIGHT

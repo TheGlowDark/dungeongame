@@ -81,6 +81,8 @@ class_name Player
 @export var attack_speed_boost = 100
 @export var hp_limit = 3
 
+var active = true
+
 @onready var hp_container = $UI/HP
 @onready var uitime = $UI/time
 @onready var map = %map
@@ -109,6 +111,8 @@ func _ready():
 #	$state_machine.character = self  # Важно передать ссылку на персонажа
 
 func _physics_process(_delta):
+	if(!active):
+		pass
 	if not is_alive:
 		return 
 	if not can_attack:
@@ -125,7 +129,7 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func update_floor():
-	$UI/Level/number.text = str(get_parent().current_level) 
+	$UI/Level/number.text = str(Global.current_level)
 	
 	
 func hp_up(amount):

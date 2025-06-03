@@ -7,7 +7,6 @@ var next_room: Vector2
 @onready var side: int
 @onready var is_open = false
 
-
 #Задаём переменную телепорта
 func set_next_pos(vector, n, r):
 	next_room = r

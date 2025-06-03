@@ -1,17 +1,20 @@
-[gd_scene load_steps=73 format=3 uid="uid://d2cfignlvplex"]
+[gd_scene load_steps=76 format=3 uid="uid://d2cfignlvplex"]
 
 [ext_resource type="Script" uid="uid://yhp3m1nopmiv" path="res://scripts/enemy_butcher.gd" id="1_xngwu"]
 [ext_resource type="Texture2D" uid="uid://cv68qhftchmfw" path="res://assets/textures/enemies/butcher/butcher1.png" id="2_imh4p"]
+[ext_resource type="AudioStream" uid="uid://cn6nmcisl3aty" path="res://assets/sfx/enemies/butcher/hurt.wav" id="2_rk7q0"]
 [ext_resource type="Script" uid="uid://xd0is48t44l3" path="res://scenes/state_machine.gd" id="3_21y2r"]
 [ext_resource type="Script" uid="uid://cnss1ox27vans" path="res://scripts/enemy_attack.gd" id="4_beqfm"]
+[ext_resource type="AudioStream" uid="uid://dkljfsi7m3rlt" path="res://assets/sfx/enemies/butcher/attack.wav" id="5_21y2r"]
 [ext_resource type="Script" uid="uid://di1yyyvluoc3o" path="res://scripts/enemy_idle.gd" id="6_gxd6r"]
 [ext_resource type="Script" uid="uid://dhnjhuxvrkjed" path="res://scripts/enemy_walk.gd" id="7_0gtyp"]
 [ext_resource type="Script" uid="uid://b4er3h47uskqw" path="res://scripts/enemy_death.gd" id="8_xtyeq"]
+[ext_resource type="AudioStream" uid="uid://c0l86jbsql0l5" path="res://assets/sfx/enemies/butcher/death.wav" id="9_beqfm"]
 [ext_resource type="Script" uid="uid://bt0jq1y38cwh6" path="res://scripts/wait.gd" id="9_imh4p"]
 [ext_resource type="Script" uid="uid://341ik3peqgwd" path="res://scenes/start.gd" id="10_21y2r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cb6f2"]
-size = Vector2(18, 23)
+size = Vector2(14, 24)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gqgfl"]
 animation = &"attack_left"
@@ -569,15 +572,18 @@ y_sort_enabled = true
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_xngwu")
+attack_delay = 0.1
+after_damage_inv_time = 0.2
 health = 2
 stun_time = 10.0
+hurt_sound = ExtResource("2_rk7q0")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="Attack_area" type="CollisionShape2D" parent="Area2D"]
 light_mask = 2
 visibility_layer = 2
-position = Vector2(-2, 0.5)
+position = Vector2(-6, 2)
 shape = SubResource("RectangleShape2D_cb6f2")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -608,6 +614,7 @@ metadata/_custom_type_script = "uid://xd0is48t44l3"
 
 [node name="attack" type="Node" parent="state_machine"]
 script = ExtResource("4_beqfm")
+attack = ExtResource("5_21y2r")
 
 [node name="idle" type="Node" parent="state_machine"]
 script = ExtResource("6_gxd6r")
@@ -617,6 +624,7 @@ script = ExtResource("7_0gtyp")
 
 [node name="death" type="Node" parent="state_machine"]
 script = ExtResource("8_xtyeq")
+sound = ExtResource("9_beqfm")
 
 [node name="wait" type="Node" parent="state_machine"]
 script = ExtResource("9_imh4p")

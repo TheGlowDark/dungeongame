@@ -3,20 +3,23 @@ class_name character_base extends CharacterBody2D
 @onready var animation_tree:= $AnimationTree
 @onready var animation_state_machine = animation_tree["parameters/playback"] 
 @onready var get_player:= get_tree().get_nodes_in_group("player")[0]
+@onready var fsm = $state_machine
+@export var after_damage_inv_time: float
+@onready var after_damage_inv_tick = after_damage_inv_time / 4
 #@onready var animation_player = $AnimationTree.get("anim_player")
 @onready var sprite := $Sprite2D
 @export var health : int
 @export var stun_time := 0.0
 var invincible : bool = false
-
+@export var hurt_sound: AudioStreamWAV
 
 func damage_effects():
 	invincible = true
 	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color.BLACK, 0.05)
-	tween.tween_property(self, "modulate", Color.WHITE, 0.05)
-	tween.tween_property(self, "modulate", Color.BLACK, 0.05)
-	tween.tween_property(self, "modulate", Color.WHITE, 0.05)
+	tween.tween_property(self, "modulate", Color.BLACK,after_damage_inv_tick)
+	tween.tween_property(self, "modulate", Color.WHITE, after_damage_inv_tick)
+	tween.tween_property(self, "modulate", Color.BLACK, after_damage_inv_tick)
+	tween.tween_property(self, "modulate", Color.WHITE, after_damage_inv_tick)
 	await tween.finished
 	invincible = false
 	
@@ -25,6 +28,8 @@ func _take_damage(amount):
 		return
 	if health > 0:
 		health -= amount
+		if health > 0:
+			AudioManager.play_sound(hurt_sound, 0, 0.2)
 		if self is Player: 
 			get_player.update_hp_icons()
 		damage_effects()

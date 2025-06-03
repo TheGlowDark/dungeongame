@@ -4,6 +4,7 @@ var rotation_speed = 10
 @onready var player = $".."
 @onready var animationplayer = $AnimationPlayer
 @export var damage = 1
+@export var attack_stun_time = 0.2
 var direction
 #func _ready():
 
@@ -15,6 +16,14 @@ func _on_body_entered(body: Node) -> void:
 		if body not in enemies_in_area and player.is_attack:
 			body._take_damage(damage)
 		enemies_in_area.append(body)  # Добавляем противника в массив
+		enemy_stun(body)
+
+func enemy_stun(body):
+	body.set_process(false)
+	body.set_physics_process(false)
+	await get_tree().create_timer(attack_stun_time).timeout 
+	body.set_process(true)
+	body.set_physics_process(true)
 
 func _on_body_exited(body: Node) -> void:
 	if body is Enemy and body in enemies_in_area:

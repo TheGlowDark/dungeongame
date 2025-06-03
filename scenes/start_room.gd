@@ -7,9 +7,13 @@ extends Room
 
 # Ваша функция для инициализации
 #
-func ready():
+func _ready():
 	if Global.current_level != 1:
-		begin_help.visible = false
-	#else:
-	#	begin_help.visible = true
-#	clear_check()	
+		print(Global.current_level)
+		begin_help.queue_free()
+
+#func _on_area_2d_body_entered(body: Node2D) -> void:
+	#if Global.current_level == 1 and body is Player and !entered:
+		#begin_help.visible = false
+		#clear_check()
+		#is_entered = true

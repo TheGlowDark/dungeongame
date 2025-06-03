@@ -3,7 +3,6 @@ class_name Enemy
 @export var attack_distance = 128
 @export var speed_base = 100
 var speed = speed_base
-@onready var fsm = $state_machine
 @onready var animation_player = $AnimationPlayer
 @export var attack_cooldown = 2.0
 @onready var navagent = $NavigationAgent2D 

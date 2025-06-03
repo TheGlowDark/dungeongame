@@ -1,7 +1,8 @@
-res://scenes
-res://assets/fonts
+res://scenes/ui
 res://scripts/vars
 res://
+res://scenes
+res://assets/fonts
 res://assets/textures/weapon
 res://rooms/normal_rooms
 res://scripts

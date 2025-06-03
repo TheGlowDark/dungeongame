@@ -31,7 +31,7 @@ var start_room_pos = Vector2(6, 6)  # Центральная позиция
 var exit_room : Vector2
 
 @onready var map = $"../Player/UI/map"
-
+@onready var player = get_tree().get_nodes_in_group("player")[0]
 func _ready():
 	TARGET_ROOM_COUNT += Global.Room_add
 #	arrow_texture()
@@ -45,10 +45,10 @@ func _ready():
 	build_dungeon()
 	map.initializate(layout)
 	#layout[start_room_pos.x][start_room_pos.y] *= -1
-	
 	#print(rooms)
 	#$Player.position = start_position
 	$Camera2D.position = start_position
+	player.active = true
 
 func build_dungeon():
 	for j in range(GRID_WIDTH):
@@ -62,7 +62,6 @@ func draw_room(y, x):
 	var s
 	if Vector2(y, x) == start_room_pos:
 		s = start_room_pool[0].instantiate()
-		s.ready()
 	elif Vector2(y, x) == exit_room:
 		s = exit_room_pool[randi_range(0, exit_room_pool.size()-1)].instantiate()
 	else:

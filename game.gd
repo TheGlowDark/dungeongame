@@ -1,6 +1,5 @@
 extends Node
 
-var current_level = 1
 var current_dungeon = null
 
 const room_root := "res://rooms/normal_rooms/room"
@@ -12,6 +11,8 @@ var start_room_pool = []
 var exit_room_pool = []
 
 @onready var player = $Player
+@export var LevelOst = AudioStreamMP3
+@onready var ost = $AudioStreamPlayer2D
 
 func get_room_path(cur_root, index: int):
 	return cur_root + str(index) + ".tscn"
@@ -26,12 +27,14 @@ func get_room_path(cur_root, index: int):
 
 
 func _ready():
+	ost.play()
 	get_room_array(room_root, room_pool)
 	get_room_array(exit_root, exit_room_pool)
 	get_room_array(start_root, start_room_pool)
 	generate_new_level()
-
+	#AudioManager.play_sound(LevelOst, 0, 0.3)
 func generate_new_level():
+	#player.active = false
 	if current_dungeon:
 		current_dungeon.queue_free()
 	
@@ -40,10 +43,11 @@ func generate_new_level():
 	# Явно устанавливаем позицию игрока после создания нового уровня
 	player.position = current_dungeon.start_position
 	player.update_floor()
+	if Global.current_level != 1: #Увеличение сложности после каждого этажа
+		Global.floor_up()
 	#map.initializate()
 	#$Camera2D.position = current_dungeon.start_position
-	
-	Global.current_level += 1  # Увеличиваем уровень ПОСЛЕ инициализации
+	#player.active = true
 
 
 func get_room_array(root, pool):

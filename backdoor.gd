@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var room = $".."
 @onready var animation_player = $AnimationPlayer
-@onready var game = get_tree().get_root().get_child(1)
+@onready var game = get_tree().get_root().get_child(2)
 var is_open = false
 
 func open():
@@ -12,6 +12,9 @@ func open():
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player and is_open:
+		body.active = false
+		Global.current_level += 1  # Увеличиваем уровень
+		body.global_position = Vector2(0, 0)
 		game.generate_new_level()
 		#body.map.initializate()
 		

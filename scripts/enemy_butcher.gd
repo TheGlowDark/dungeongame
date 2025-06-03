@@ -64,8 +64,17 @@ func attack():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player and fsm.current_state != fsm.states.get("death"):
-		is_player_in_range = true  # Игрок вошёл в зону
-		fsm.change_state(fsm.current_state, "attack")  # Переход в состояние атаки
+		is_player_in_range = true
+		
+		# Добавляем проверку, чтобы избежать множественных атак
+		if not is_attacking:
+			is_attacking = true
+			await get_tree().create_timer(attack_delay).timeout
+			
+			# Проверяем, что игрок всё ещё в зоне после задержки
+			if is_player_in_range and fsm.current_state != fsm.states.get("death"):
+				fsm.change_state(fsm.current_state, "attack")
+			is_attacking = false
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:

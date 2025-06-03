@@ -19,7 +19,7 @@ position = Vector2(172, 20)
 position = Vector2(343, 181)
 
 [node name="door3" type="Marker2D" parent="."]
-position = Vector2(177, 334)
+position = Vector2(176, 334)
 
 [node name="door4" type="Marker2D" parent="."]
 position = Vector2(10, 179)

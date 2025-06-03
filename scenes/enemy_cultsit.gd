@@ -5,11 +5,13 @@ class_name Enemy_cultist
 @onready var bulletspawnpoint = $bullletspawn
 @onready var bullet := preload("res://scenes/bullet.tscn")
 @onready var raycast = $ShapeCast2D
+@export var attack_s: AudioStreamWAV
 #@export var delay_time = 1.0
-
+@export var charge_sound: AudioStreamWAV
 
 func attack():
 	if can_attack and player_attack_check():
+		AudioManager.play_sound(charge_sound, 0, 0.2)
 		await get_tree().create_timer(attack_delay).timeout
 		if(health > 0):
 			var b = bullet.instantiate()
@@ -21,6 +23,7 @@ func attack():
 			var players = get_tree().get_nodes_in_group("player")
 			if players.size() > 0:
 				b.direction = (players[0].global_position - b.global_position).normalized()
+			AudioManager.play_sound(attack_s, 0,0.3)
 
 func _ready():	
 	process_mode = PROCESS_MODE_DISABLED

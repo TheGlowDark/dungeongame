@@ -1,14 +1,18 @@
-[gd_scene load_steps=73 format=3 uid="uid://bhkj1xlqrsck2"]
+[gd_scene load_steps=77 format=3 uid="uid://bhkj1xlqrsck2"]
 
 [ext_resource type="Script" uid="uid://goo7nlutisjx" path="res://scenes/enemy_cultsit.gd" id="1_dwev6"]
+[ext_resource type="AudioStream" uid="uid://g5gxc4uqwxhg" path="res://assets/sfx/enemies/cultist/charge.wav" id="2_jnu8q"]
 [ext_resource type="Texture2D" uid="uid://bqty0dajrk6i0" path="res://assets/textures/enemies/cultist/cultist.png" id="2_miwvq"]
 [ext_resource type="Script" uid="uid://xd0is48t44l3" path="res://scenes/state_machine.gd" id="3_miwvq"]
 [ext_resource type="Script" uid="uid://bayru71a85ek1" path="res://scripts/cultist_attack.gd" id="4_l06os"]
+[ext_resource type="AudioStream" uid="uid://dencouw2kuh8x" path="res://assets/sfx/enemies/cultist/hurt.wav" id="4_p6j80"]
 [ext_resource type="Script" uid="uid://di1yyyvluoc3o" path="res://scripts/enemy_idle.gd" id="6_dvlbs"]
+[ext_resource type="AudioStream" uid="uid://dxvs8acx0y06r" path="res://assets/sfx/enemies/cultist/attack.wav" id="6_q145h"]
 [ext_resource type="Script" uid="uid://dhnjhuxvrkjed" path="res://scripts/enemy_walk.gd" id="7_bcjmo"]
 [ext_resource type="Script" uid="uid://b4er3h47uskqw" path="res://scripts/enemy_death.gd" id="8_hgyi7"]
 [ext_resource type="Script" uid="uid://bt0jq1y38cwh6" path="res://scripts/wait.gd" id="9_l06os"]
 [ext_resource type="Script" uid="uid://k7mcg6biqu4t" path="res://scripts/hurt.gd" id="10_ie1m3"]
+[ext_resource type="AudioStream" uid="uid://bcdw1em3i4k3q" path="res://assets/sfx/enemies/cultist/death.wav" id="10_q145h"]
 [ext_resource type="Script" uid="uid://341ik3peqgwd" path="res://scenes/start.gd" id="10_ytd26"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gqgfl"]
@@ -567,10 +571,14 @@ y_sort_enabled = true
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_dwev6")
+attack_s = ExtResource("6_q145h")
+charge_sound = ExtResource("2_jnu8q")
 attack_distance = 96
 speed_base = 50
 attack_delay = 2.0
+after_damage_inv_time = 0.2
 health = 2
+hurt_sound = ExtResource("4_p6j80")
 
 [node name="bullletspawn" type="Marker2D" parent="."]
 
@@ -611,6 +619,7 @@ script = ExtResource("7_bcjmo")
 
 [node name="death" type="Node" parent="state_machine"]
 script = ExtResource("8_hgyi7")
+sound = ExtResource("10_q145h")
 
 [node name="wait" type="Node" parent="state_machine"]
 script = ExtResource("9_l06os")
