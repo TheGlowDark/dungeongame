@@ -49,6 +49,7 @@ texture = ExtResource("2_0vyny")
 hframes = 3
 
 [node name="Area2D" type="Area2D" parent="."]
+priority = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_tgep7")

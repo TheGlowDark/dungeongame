@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bqult0fmkkji"]
 
-[ext_resource type="Script" uid="uid://b0b7hu5by5gum" path="res://Game.gd" id="1_qbsmt"]
+[ext_resource type="Script" uid="uid://dvitwtmapa8xg" path="res://Game.gd" id="1_qbsmt"]
 [ext_resource type="AudioStream" uid="uid://c1n4xjrdl8tg0" path="res://assets/sfx/music/Pixelated Skirmish.wav" id="2_78awf"]
 [ext_resource type="PackedScene" uid="uid://pe4vu6hw1tvk" path="res://scenes/player.tscn" id="2_cpr0p"]
 [ext_resource type="AudioStream" uid="uid://bslxxwl2v526b" path="res://assets/sfx/music/Untitled (1).mp3" id="4_s0nni"]
@@ -20,6 +20,8 @@ script = ExtResource("1_qbsmt")
 LevelOst = ExtResource("2_78awf")
 
 [node name="Player" parent="." instance=ExtResource("2_cpr0p")]
+z_as_relative = true
+y_sort_enabled = false
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamPlaylist_kiw3p")

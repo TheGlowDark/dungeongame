@@ -80,12 +80,6 @@ position = Vector2(112, 236)
 [node name="Enemy_cultsit2" parent="Enemies" instance=ExtResource("3_v5s05")]
 position = Vector2(240, 108)
 
-[node name="Enemy_cultsit3" parent="Enemies" instance=ExtResource("3_v5s05")]
-position = Vector2(110, 108)
-
-[node name="Enemy_cultsit4" parent="Enemies" instance=ExtResource("3_v5s05")]
-position = Vector2(240, 237)
-
 [node name="butcher" parent="Enemies" instance=ExtResource("5_wy3j3")]
 position = Vector2(151, 176)
 

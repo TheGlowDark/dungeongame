@@ -33,6 +33,7 @@ func _ready():
 	generate_new_level()
 	#AudioManager.play_sound(LevelOst, 0, 0.3)
 func generate_new_level():
+	player.process_mode = Node.PROCESS_MODE_DISABLED
 	#player.active = false
 	if current_dungeon:
 		current_dungeon.queue_free()
@@ -47,6 +48,7 @@ func generate_new_level():
 	if Global.current_level != 1: #Увеличение сложности после каждого этажа
 		Global.floor_up()
 	player.initializate()
+	player.process_mode = Node.PROCESS_MODE_INHERIT
 	#map.initializate()
 	#$Camera2D.position = current_dungeon.start_position
 	#player.active = true

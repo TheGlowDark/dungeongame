@@ -393,7 +393,6 @@ size = Vector2(28.5, 26)
 [node name="Player" type="CharacterBody2D" groups=["Player", "player"]]
 z_index = 1
 z_as_relative = false
-y_sort_enabled = true
 script = ExtResource("1_qhqgy")
 attack_speed_boost = 120
 after_damage_inv_time = 0.6

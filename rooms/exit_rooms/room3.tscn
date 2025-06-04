@@ -74,9 +74,6 @@ position = Vector2(161, 178)
 [node name="Enemies" type="Node2D" parent="."]
 process_mode = 3
 
-[node name="Enemy_cultsit" parent="Enemies" instance=ExtResource("3_7sqil")]
-position = Vector2(182, 220)
-
 [node name="Enemy_cultsit2" parent="Enemies" instance=ExtResource("3_7sqil")]
 position = Vector2(119, 176)
 

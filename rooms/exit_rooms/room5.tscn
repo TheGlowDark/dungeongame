@@ -81,9 +81,6 @@ position = Vector2(247, 216)
 position = Vector2(141, 203)
 
 [node name="butcher2" parent="Enemies" instance=ExtResource("4_6ssg0")]
-position = Vector2(250, 181)
-
-[node name="butcher3" parent="Enemies" instance=ExtResource("4_6ssg0")]
-position = Vector2(139, 174)
+position = Vector2(239, 128)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

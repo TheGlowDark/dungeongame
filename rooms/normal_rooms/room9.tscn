@@ -77,7 +77,4 @@ position = Vector2(220, 149)
 [node name="butcher3" parent="Enemies" instance=ExtResource("3_ppo73")]
 position = Vector2(131, 235)
 
-[node name="butcher4" parent="Enemies" instance=ExtResource("3_ppo73")]
-position = Vector2(299, 72)
-
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

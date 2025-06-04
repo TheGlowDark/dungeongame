@@ -4,6 +4,7 @@ class_name Dungeon_room
 @onready var enemies_list = $Enemies
 @onready var dropped_items = $items
 @onready var fog = $ColorRect
+@onready var area2d = $Area2D
 @export var hp_spawn_delay = 0.5
 func hp_drop():
 	if randi_range(1, 100) <= hp_chance_drop:
@@ -12,9 +13,25 @@ func hp_drop():
 		dropped_items.add_child(h)
 		h.appear()
 
+#func enable_collision():
+#	$Area2D.monitoring = true
+	
+func clear_check():
+	clear = (enemies_count <= 0)
+	print(enemies_count)
+	if clear:
+		AudioManager.play_sound(opensound, 0, 0.2)
+		hp_drop()
+		for child in doors.get_children():
+			child.open()
+
+
 func _ready():
 	enemies_count = enemies_list.get_child_count()
 	fog.visible = true
+	area2d.monitoring = false
+	await get_tree().create_timer(1.0).timeout
+	area2d.monitoring = true
 	#clear_check()
 	
 func _on_area_2d_body_entered(body) -> void:

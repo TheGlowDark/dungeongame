@@ -16,29 +16,12 @@ var is_current = false
 
 
 
-#func enable_collision():
-#	$Area2D.monitoring = true
-	
-func clear_check():
-	clear = (enemies_count <= 0)
-	print(enemies_count)
-	if clear:
-		AudioManager.play_sound(opensound, 0, 0.2)
-		hp_drop()
-		for child in doors.get_children():
-			child.open()
-
-func hp_drop():
-	if randi_range(1, 100) <= hp_chance_drop and self is Dungeon_room:
-		var dropped_items = $items
-		var h = heart.instantiate()
-		dropped_items.add_child(h)
-
 #func _ready() -> void:
 	#process_mode = PROCESS_MODE_DISABLED
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if !is_entered and body is Player: #and body.active:
-		clear_check()
+		for child in doors.get_children():
+			child.open()
 		is_entered = true

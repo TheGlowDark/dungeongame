@@ -44,6 +44,7 @@ func _ready():
 	randomize()
 	generate_paths()
 	print_layout()
+	place_boss_room()
 	build_dungeon()
 	map.initializate(layout)
 	#layout[start_room_pos.x][start_room_pos.y] *= -1
