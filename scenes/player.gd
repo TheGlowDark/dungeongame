@@ -131,6 +131,12 @@ func _physics_process(_delta):
 #	$state_machine._physics_process(delta)
 	move_and_slide()
 
+func wait():
+	active = false
+
+func initializate():
+	process_mode = PROCESS_MODE_INHERIT
+
 func update_floor():
 	$UI/Level/number.text = str(Global.current_level)
 	

@@ -14,8 +14,10 @@ var is_entered = false
 var enemies_count = 0
 var is_current = false
 
-func _ready():
-	clear_check()	
+
+
+#func enable_collision():
+#	$Area2D.monitoring = true
 	
 func clear_check():
 	clear = (enemies_count <= 0)
@@ -37,6 +39,6 @@ func hp_drop():
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if !is_entered and body is Player and body.active:
+	if !is_entered and body is Player: #and body.active:
 		clear_check()
 		is_entered = true

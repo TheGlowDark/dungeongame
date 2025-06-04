@@ -14,6 +14,8 @@ stream_1 = ExtResource("4_s0nni")
 stream_2 = ExtResource("5_aug50")
 
 [node name="Game" type="Node2D"]
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_qbsmt")
 LevelOst = ExtResource("2_78awf")
 

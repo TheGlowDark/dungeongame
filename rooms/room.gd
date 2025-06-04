@@ -14,10 +14,11 @@ func hp_drop():
 
 func _ready():
 	enemies_count = enemies_list.get_child_count()
+	fog.visible = true
 	#clear_check()
 	
 func _on_area_2d_body_entered(body) -> void:
-	if body is Player and is_instance_valid(fog) and body.active:
+	if body is Player and is_instance_valid(fog): #and body.active:
 	#	get_tree().call_group(id, "set_process_mode", Node.PROCESS_MODE_INHERIT)
 		fog.queue_free()
 		is_entered = true

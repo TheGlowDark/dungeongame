@@ -13,11 +13,12 @@ func appear():
 	visible = true
 	$Panel/VBoxContainer/Score.text += str(Global.score)
 	line_edit.text = Global.player_name
+	await Leaderboards.post_guest_score("waximum-waximum-3ZPC", Global.score, Global.player_name)
 	
 
 func _on_line_edit_text_changed(new_text: String) -> void:
 	Global.player_name = new_text
-	print(player_name)
+#	print(player_name)
 
 
 func _on_submit_pressed() -> void:

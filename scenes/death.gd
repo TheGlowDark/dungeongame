@@ -5,6 +5,7 @@ extends State
 
 func enter():
 	player.velocity = Vector2.ZERO
+	player.set_physics_process(0)
 	player.animation_travel("death")
 	AudioManager.play_sound(sound, 0, 1)
 	await get_tree().create_timer(1).timeout 

@@ -9,7 +9,6 @@ const exit_root := "res://rooms/exit_rooms/room"
 var room_pool = []
 var start_room_pool = []
 var exit_room_pool = []
-
 @onready var player = $Player
 @export var LevelOst = AudioStreamMP3
 @onready var ost = $AudioStreamPlayer2D
@@ -40,11 +39,14 @@ func generate_new_level():
 	
 	current_dungeon = preload("res://scenes/level.tscn").instantiate()
 	add_child(current_dungeon)
+	player.active = true
 	# Явно устанавливаем позицию игрока после создания нового уровня
-	player.position = current_dungeon.start_position
+#	player.position = current_dungeon.start_position
+	#emit_signal("initialization_completed")
 	player.update_floor()
 	if Global.current_level != 1: #Увеличение сложности после каждого этажа
 		Global.floor_up()
+	player.initializate()
 	#map.initializate()
 	#$Camera2D.position = current_dungeon.start_position
 	#player.active = true

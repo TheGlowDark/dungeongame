@@ -20,6 +20,8 @@ func update(_delta: float):
 	if enemy.health <= 0:
 		state_transition.emit(self, "death")
 		return
+	if !enemy.get_player.is_alive:
+		state_transition.emit(self, "start")
 	#enemy.update_animation(enemy.get_distance().normalized() * Vector2(1, -1))
 	# Если таймер атаки закончился и игрок всё ещё в зоне
 	if enemy.attack_timer.is_stopped():

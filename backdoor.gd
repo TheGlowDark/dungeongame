@@ -14,7 +14,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player and is_open:
 		body.active = false
 		Global.current_level += 1  # Увеличиваем уровень
-		body.global_position = Vector2(0, 0)
-		game.generate_new_level()
+		#await body.wait()
+		body.global_position = Vector2.ZERO
+		game.call_deferred("generate_new_level")
 		#body.map.initializate()
 		

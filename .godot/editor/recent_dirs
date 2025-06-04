@@ -1,3 +1,6 @@
+res://rooms/exit_rooms
+res://rooms/normal_rooms
+res://rooms
 res://scripts/leaderboard
 res://scenes/ui
 res://scripts/vars
@@ -5,6 +8,5 @@ res://
 res://scenes
 res://assets/fonts
 res://assets/textures/weapon
-res://rooms/normal_rooms
 res://scripts
 res://assets/textures/cursor
