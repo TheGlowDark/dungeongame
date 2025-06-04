@@ -9,6 +9,7 @@ func enter():
 	enemy.animation_travel("death")
 	enemy.room.enemies_count -= 1
 	enemy.room.clear_check()
+	Global.score += enemy.score * Global.dif_multiplier
 	AudioManager.play_sound(sound, 0, 0.3)
 	await get_tree().create_timer(5).timeout
 	enemy._die()

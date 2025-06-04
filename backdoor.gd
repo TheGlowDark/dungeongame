@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var room = $".."
 @onready var animation_player = $AnimationPlayer
-@onready var game = get_tree().get_root().get_child(2)
+@onready var game = get_tree().get_root().get_child(4)
 var is_open = false
 
 func open():

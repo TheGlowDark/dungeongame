@@ -92,6 +92,8 @@ var minutes:= 0
 var seconds:= 0
 var mseconds:= 0
 
+@onready var second = $second
+
 
 var can_attack = true
 var is_alive = true
@@ -111,17 +113,18 @@ func _ready():
 #	$state_machine.character = self  # Важно передать ссылку на персонажа
 
 func _physics_process(_delta):
-	if(!active):
-		pass
-	if not is_alive:
-		return 
+	#if(!active):
+	#s	pass
+	#if not is_alive:
+	#	velocity = Vector2.ZERO
+	#	return 
 	if not can_attack:
 		attack_cooldown_timer -= _delta
 		if attack_cooldown_timer <= 0:
 			can_attack = true
 			attack_cooldown_timer = attack_cooldown
 	time = float(time) + _delta
-	update_time()
+	update_ui()
 	#print(can_attack)
 	# StateMachine теперь управляет всем
 	#get_input()
@@ -131,6 +134,9 @@ func _physics_process(_delta):
 func update_floor():
 	$UI/Level/number.text = str(Global.current_level)
 	
+func sectimer(): #таймер для 1 секунды
+	second.wait_time = 1.0
+	second.autostart = true
 	
 func hp_up(amount):
 	if(health < 3):
@@ -138,6 +144,9 @@ func hp_up(amount):
 		update_hp_icons()
 	return health < 3
 
+func update_ui():
+	update_time()
+	update_score()
 
 func update_time():
 	mseconds = fmod(time, 1) * 100
@@ -146,8 +155,13 @@ func update_time():
 	$UI/time/minutes.text = "%02d:" % minutes
 	$UI/time/seconds.text = "%02d." % seconds
 	$UI/time/mseconds.text = "%03d" % mseconds
-	
+	if(Global.score < 0):
+		Global.score = 0
 	 
+func update_score():
+	$UI/Control/VBoxContainer/Score.text = str(Global.score)
+	
+	
 func update_hp_icons():
 	var hp_icons = hp_container.get_children()
 	var delta_hp = health - hp_icons.size()
@@ -213,3 +227,7 @@ func update_look_direction():
 		#animation_state_machine.travel("walk")
 	#else:
 		#animation_state_machine.travel("idle")
+
+
+func _on_second_timeout() -> void:
+	Global.score -= Global.time_score_lose

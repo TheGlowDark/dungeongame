@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://7t7hclljgpy1"]
+
+[ext_resource type="Script" uid="uid://dkedpsofkwrmi" path="res://scenes/ui/pause.gd" id="1_xld5c"]
+[ext_resource type="FontFile" uid="uid://dk6wu850xdpn4" path="res://assets/fonts/monogram.ttf" id="2_k23cl"]
+
+[sub_resource type="Theme" id="Theme_qgos8"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xld5c")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.5
+offset_top = -75.5
+offset_right = 55.5
+offset_bottom = 75.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -35.5
+offset_right = 35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k23cl")
+text = "Resume"
+
+[node name="Restart" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k23cl")
+text = "Restart"
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_qgos8")
+theme_override_fonts/font = ExtResource("2_k23cl")
+text = "Quit"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

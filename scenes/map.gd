@@ -21,7 +21,7 @@ func _ready():
 func initializate(l):
 	
 	clear_matrix()
-	var level = get_tree().root.get_child(2).get_child(2)
+	var level = get_tree().root.get_child(4).get_child(2)
 	layout = l
 	grid_size.x = level.GRID_WIDTH
 	grid_size.y = level.GRID_HEIGHT

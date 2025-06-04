@@ -1,0 +1,132 @@
+[gd_scene load_steps=9 format=3 uid="uid://55mg0dobfgok"]
+
+[ext_resource type="Script" uid="uid://b3r6bgy1uwywf" path="res://scripts/leaderboard/leader_board.gd" id="1_jbpuk"]
+[ext_resource type="PackedScene" uid="uid://dgygkbtm0burn" path="res://addons/quiver_leaderboards/leaderboard_ui.tscn" id="2_30rqn"]
+[ext_resource type="FontFile" uid="uid://dk6wu850xdpn4" path="res://assets/fonts/monogram.ttf" id="3_30rqn"]
+
+[sub_resource type="Theme" id="Theme_unarw"]
+default_font = ExtResource("3_30rqn")
+
+[sub_resource type="Theme" id="Theme_vby4o"]
+default_font = ExtResource("3_30rqn")
+
+[sub_resource type="Theme" id="Theme_lwaka"]
+
+[sub_resource type="Theme" id="Theme_30rqn"]
+
+[sub_resource type="Theme" id="Theme_58ege"]
+default_font = ExtResource("3_30rqn")
+
+[node name="LeaderBoard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jbpuk")
+
+[node name="LeaderboardUI" parent="." instance=ExtResource("2_30rqn")]
+visible = false
+layout_mode = 1
+offset_left = -2.0
+offset_top = -1.0
+offset_right = -1.0
+offset_bottom = 2.0
+theme = SubResource("Theme_unarw")
+
+[node name="Button" type="Button" parent="LeaderboardUI"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Panel" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -87.5
+offset_right = 133.0
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -24.0
+offset_right = -24.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_vby4o")
+text = "Score"
+
+[node name="LineEdit" type="LineEdit" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_30rqn")
+alignment = 2
+max_length = 10
+
+[node name="Submit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_lwaka")
+theme_override_fonts/font = ExtResource("3_30rqn")
+text = "submit"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+offset_left = 163.0
+offset_top = 58.0
+offset_right = 237.0
+offset_bottom = 129.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeaderBoard" type="Button" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_30rqn")
+text = "LeaderBoard
+"
+
+[node name="Restart" type="Button" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_30rqn")
+text = "Restart"
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+theme = SubResource("Theme_30rqn")
+theme_override_fonts/font = ExtResource("3_30rqn")
+text = "Quit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.291
+anchor_right = 0.5
+anchor_bottom = 0.291
+offset_left = -23.0
+offset_top = -8.12
+offset_right = 25.0
+offset_bottom = 4.88
+grow_horizontal = 2
+theme = SubResource("Theme_58ege")
+text = "YOU DIED"
+
+[connection signal="pressed" from="LeaderboardUI/Button" to="." method="_on_button_pressed"]
+[connection signal="text_submitted" from="Panel/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="Panel/VBoxContainer/Submit" to="." method="_on_submit_pressed"]

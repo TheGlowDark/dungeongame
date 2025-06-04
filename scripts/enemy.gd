@@ -3,6 +3,7 @@ class_name Enemy
 @export var attack_distance = 128
 @export var speed_base = 100
 var speed = speed_base
+@export var score = 100
 @onready var animation_player = $AnimationPlayer
 @export var attack_cooldown = 2.0
 @onready var navagent = $NavigationAgent2D 
@@ -27,8 +28,8 @@ func _ready():
 	update_animation(Vector2.LEFT)
 	
 func activate_enemy():
-	process_mode = PROCESS_MODE_ALWAYS
-	fsm.process_mode = PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_INHERIT
+	fsm.process_mode = Node.PROCESS_MODE_INHERIT
 	fsm.change_state(fsm.initial_state, "wait")
 
 
