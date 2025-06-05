@@ -40,7 +40,7 @@ func floor_up():
 		dif_up()
 	else:
 		level_up_counter = 0
-	if current_level % 2 == 2 and Room_add < 15:
+	if current_level % 2 == 0 and Room_add < 15:
 		Room_add += 1
 
 
