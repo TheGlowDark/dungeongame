@@ -28,10 +28,16 @@ func _ready():
 	update_animation(Vector2.LEFT)
 	
 func activate_enemy():
-	process_mode = Node.PROCESS_MODE_INHERIT
-	fsm.process_mode = Node.PROCESS_MODE_INHERIT
+	process_mode = Node.PROCESS_MODE_PAUSABLE
+	fsm.process_mode = Node.PROCESS_MODE_PAUSABLE
 	fsm.change_state(fsm.initial_state, "wait")
 
+func stun(attack_stun_time):
+	set_process(false)
+	set_physics_process(false)
+	await get_tree().create_timer(attack_stun_time).timeout 
+	set_process(true)
+	set_physics_process(true)
 
 
 func _physics_process(_delta: float):

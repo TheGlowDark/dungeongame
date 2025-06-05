@@ -17,10 +17,10 @@ stream_2 = ExtResource("5_aug50")
 z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("1_qbsmt")
-LevelOst = ExtResource("2_78awf")
 
 [node name="Player" parent="." instance=ExtResource("2_cpr0p")]
 z_as_relative = true
+position = Vector2(-189, 802)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamPlaylist_kiw3p")

@@ -43,14 +43,23 @@ func _ready():
 	exit_room_pool = get_parent().exit_room_pool
 	$Camera2D.start()
 	randomize()
-	generate_paths()
-	print_layout()
-	build_dungeon()
-	map.initializate(layout)
+	#generate_paths()
+	#print_layout()
+	#build_dungeon()
+	#map.initializate(layout)
 	#layout[start_room_pos.x][start_room_pos.y] *= -1
 	#print(rooms)
 	#$Player.position = start_position
 	player.active = true
+
+func generate():
+	print("Генерация структуры уровня...")
+	generate_paths()
+	print_layout()
+	build_dungeon()
+	map.initializate(layout)
+	player.update_floor()
+	
 
 func build_dungeon():
 	for j in range(GRID_WIDTH):
@@ -207,7 +216,10 @@ func place_furthest_boss_room():
 		layout[furthest_room.x][furthest_room.y] = RoomType.BOSS
 		rooms[furthest_room].type = RoomType.BOSS
 		exit_room = furthest_room
+		
 
+	# Возвращаем управление после завершения
+	await get_tree().process_frame
 func print_layout():
 	var symbols = {
 		RoomType.EMPTY: " ",

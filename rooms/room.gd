@@ -30,7 +30,7 @@ func _ready():
 	enemies_count = enemies_list.get_child_count()
 	fog.visible = true
 	area2d.monitoring = false
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.8).timeout
 	area2d.monitoring = true
 	#clear_check()
 	

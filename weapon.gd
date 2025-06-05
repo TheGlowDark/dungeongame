@@ -20,11 +20,8 @@ func _on_body_entered(body: Node) -> void:
 
 func enemy_stun(body):
 #	pass
-	body.set_process(false)
-	body.set_physics_process(false)
-	await get_tree().create_timer(attack_stun_time).timeout 
-	body.set_process(true)
-	body.set_physics_process(true)
+	if(body is Enemy and body != null):
+		body.stun(attack_stun_time)
 
 func _on_body_exited(body: Node) -> void:
 	if body is Enemy and body in enemies_in_area:

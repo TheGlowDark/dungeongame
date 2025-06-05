@@ -69,7 +69,7 @@ shape = SubResource("RectangleShape2D_g4tch")
 position = Vector2(176, 176)
 
 [node name="items" type="Node2D" parent="."]
-position = Vector2(161, 178)
+position = Vector2(178, 226)
 
 [node name="Enemies" type="Node2D" parent="."]
 process_mode = 3
