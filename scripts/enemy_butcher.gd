@@ -53,12 +53,11 @@ func player_attack_check() -> bool:
 	#update_animation()
 
 func attack():
-	attack_timer.start()
 	if can_attack and is_player_in_range:
 		# Наносим урон игроку (если он всё ещё в зоне)
 		if get_player and !get_player.is_attack:
 			get_player._take_damage(damage)
-	can_attack = false
+	attack_timer.start()
 	#attack_timer.start(attack_cooldown)  # Задержка перед следующей атакой
 
 
@@ -67,8 +66,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		is_player_in_range = true
 		
 		# Добавляем проверку, чтобы избежать множественных атак
-		if not is_attacking:
-			is_attacking = true
+		if is_attacking:
+			#is_attacking = true
 			await get_tree().create_timer(attack_delay).timeout
 			
 			# Проверяем, что игрок всё ещё в зоне после задержки

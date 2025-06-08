@@ -10,10 +10,11 @@ func enter():
 	if enemy.player_attack_check() and enemy.can_attack:
 		enemy.animation_travel("attack")
 		AudioManager.play_sound(attack, 0, 0.1)
+		enemy.attack()  # Запускаем атаку
+		enemy.is_attacking = false
 		enemy.attack_timer.start(enemy.attack_cooldown)
 		enemy.velocity = Vector2.ZERO  # Останавливаем движение
-		enemy.attack()  # Запускаем атаку
-		state_transition.emit(self, "idle")  # Иначе возвращаемся в idle
+		#state_transition.emit(self, "idle")  # Иначе возвращаемся в idle
 		#await enemy.attack_timer.timeout
 	#else:
 
@@ -22,9 +23,9 @@ func update(_delta: float):
 	if enemy.health <= 0:
 		state_transition.emit(self, "death")
 		return
-	if !enemy.get_player.is_alive:
-		state_transition.emit(self, "start")
-		return
+	#if !enemy.get_player.is_alive:
+		#state_transition.emit(self, "start")
+		#return
 	#enemy.update_animation(enemy.get_distance().normalized() * Vector2(1, -1))
 	# Если таймер атаки закончился и игрок всё ещё в зоне
 	if enemy.attack_timer.is_stopped():

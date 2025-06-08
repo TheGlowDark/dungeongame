@@ -23,8 +23,8 @@ func _ready():
 
 func _on_rooms_loaded():
 	print("Все комнаты загружены, начинаем генерацию уровня")
-	await generate_new_level()
-	print("Уровень успешно сгенерирован")
+	generate_new_level()
+	#print("Уровень успешно сгенерирован")
 	
 	# Активируем игрока
 	$Player.active = true

@@ -29,7 +29,6 @@ window/size/viewport_height=320
 window/size/mode=4
 window/size/resizable=false
 window/stretch/mode="viewport"
-window/stretch/aspect="ignore"
 mouse_cursor/custom_image="uid://cxvx4j8h87d07"
 mouse_cursor/custom_image_hotspot=Vector2(32, 32)
 
@@ -95,5 +94,6 @@ general/auth_token="tJCwZrTVe20a15FaFw1DKTDdfr4oFemJBKkTzFvh"
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

@@ -575,7 +575,6 @@ script = ExtResource("1_xngwu")
 attack_delay = 0.1
 after_damage_inv_time = 0.2
 health = 2
-stun_time = 10.0
 hurt_sound = ExtResource("2_rk7q0")
 
 [node name="Area2D" type="Area2D" parent="."]

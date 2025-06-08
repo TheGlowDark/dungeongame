@@ -1,17 +1,16 @@
-[gd_scene load_steps=77 format=3 uid="uid://bhkj1xlqrsck2"]
+[gd_scene load_steps=68 format=3 uid="uid://bhkj1xlqrsck2"]
 
 [ext_resource type="Script" uid="uid://goo7nlutisjx" path="res://scenes/enemy_cultsit.gd" id="1_dwev6"]
 [ext_resource type="AudioStream" uid="uid://g5gxc4uqwxhg" path="res://assets/sfx/enemies/cultist/charge.wav" id="2_jnu8q"]
 [ext_resource type="Texture2D" uid="uid://bqty0dajrk6i0" path="res://assets/textures/enemies/cultist/cultist.png" id="2_miwvq"]
 [ext_resource type="Script" uid="uid://xd0is48t44l3" path="res://scenes/state_machine.gd" id="3_miwvq"]
-[ext_resource type="Script" uid="uid://bayru71a85ek1" path="res://scripts/cultist_attack.gd" id="4_l06os"]
 [ext_resource type="AudioStream" uid="uid://dencouw2kuh8x" path="res://assets/sfx/enemies/cultist/hurt.wav" id="4_p6j80"]
 [ext_resource type="Script" uid="uid://di1yyyvluoc3o" path="res://scripts/enemy_idle.gd" id="6_dvlbs"]
 [ext_resource type="AudioStream" uid="uid://dxvs8acx0y06r" path="res://assets/sfx/enemies/cultist/attack.wav" id="6_q145h"]
 [ext_resource type="Script" uid="uid://dhnjhuxvrkjed" path="res://scripts/enemy_walk.gd" id="7_bcjmo"]
+[ext_resource type="Script" uid="uid://cnss1ox27vans" path="res://scripts/enemy_attack.gd" id="7_q145h"]
 [ext_resource type="Script" uid="uid://b4er3h47uskqw" path="res://scripts/enemy_death.gd" id="8_hgyi7"]
 [ext_resource type="Script" uid="uid://bt0jq1y38cwh6" path="res://scripts/wait.gd" id="9_l06os"]
-[ext_resource type="Script" uid="uid://k7mcg6biqu4t" path="res://scripts/hurt.gd" id="10_ie1m3"]
 [ext_resource type="AudioStream" uid="uid://bcdw1em3i4k3q" path="res://assets/sfx/enemies/cultist/death.wav" id="10_q145h"]
 [ext_resource type="Script" uid="uid://341ik3peqgwd" path="res://scenes/start.gd" id="10_ytd26"]
 
@@ -60,31 +59,6 @@ blend_point_1/pos = Vector2(0, 1.1)
 blend_point_2/node = SubResource("AnimationNodeAnimation_cdia0")
 blend_point_2/pos = Vector2(0, -1.1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_hosmv")
-blend_point_3/pos = Vector2(1, 0)
-min_space = Vector2(-1, -1.1)
-max_space = Vector2(1, 1.1)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ie1m3"]
-animation = &"hurt_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jnu8q"]
-animation = &"hurt_up"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q145h"]
-animation = &"hurt_down"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p6j80"]
-animation = &"hurt_right"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_xbor1"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_ie1m3")
-blend_point_0/pos = Vector2(-1, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_jnu8q")
-blend_point_1/pos = Vector2(0, 1.1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_q145h")
-blend_point_2/pos = Vector2(0, -1.1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_p6j80")
 blend_point_3/pos = Vector2(1, 0)
 min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
@@ -146,12 +120,6 @@ advance_mode = 0
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l06os"]
 advance_mode = 0
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ytd26"]
-advance_mode = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ie1m3"]
-advance_mode = 0
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jnu8q"]
 advance_mode = 2
 
@@ -170,9 +138,6 @@ advance_mode = 0
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ohs8l"]
 advance_mode = 0
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u5222"]
-advance_mode = 0
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0motp"]
 advance_mode = 0
 
@@ -182,14 +147,12 @@ states/attack/node = SubResource("AnimationNodeBlendSpace2D_miwvq")
 states/attack/position = Vector2(666, 139)
 states/death/node = SubResource("AnimationNodeBlendSpace2D_m46wk")
 states/death/position = Vector2(736, 32)
-states/hurt/node = SubResource("AnimationNodeBlendSpace2D_xbor1")
-states/hurt/position = Vector2(550, 233)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_dvlbs")
 states/idle/position = Vector2(406, 100)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_bcjmo")
 states/walk/position = Vector2(193, 212)
-transitions = ["walk", "attack", SubResource("AnimationNodeStateMachineTransition_hgyi7"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_l06os"), "attack", "hurt", SubResource("AnimationNodeStateMachineTransition_ytd26"), "walk", "hurt", SubResource("AnimationNodeStateMachineTransition_ie1m3"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_jnu8q"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_q145h"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_p6j80"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_gqgfl"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_2nb7p"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_ohs8l"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_u5222"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_0motp")]
-graph_offset = Vector2(-1, 57)
+transitions = ["walk", "attack", SubResource("AnimationNodeStateMachineTransition_hgyi7"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_l06os"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_jnu8q"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_q145h"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_p6j80"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_gqgfl"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_2nb7p"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_ohs8l"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_0motp")]
+graph_offset = Vector2(17, 8)
 
 [sub_resource type="Animation" id="Animation_m46wk"]
 length = 0.001
@@ -574,10 +537,10 @@ script = ExtResource("1_dwev6")
 attack_s = ExtResource("6_q145h")
 charge_sound = ExtResource("2_jnu8q")
 attack_distance = 96
-speed_base = 50
 attack_delay = 2.0
 after_damage_inv_time = 0.2
 health = 2
+speed_base = 50
 hurt_sound = ExtResource("4_p6j80")
 
 [node name="bullletspawn" type="Marker2D" parent="."]
@@ -587,7 +550,6 @@ tree_root = SubResource("AnimationNodeStateMachine_u5222")
 anim_player = NodePath("../AnimationPlayer")
 parameters/attack/blend_position = Vector2(0, 0)
 parameters/death/blend_position = Vector2(0, 0)
-parameters/hurt/blend_position = Vector2(0.00432277, 0.0967033)
 parameters/idle/blend_position = Vector2(0, 0.0120878)
 parameters/walk/blend_position = Vector2(-0.00123918, -0.193407)
 
@@ -605,11 +567,11 @@ vframes = 8
 
 [node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_miwvq")
-initial_state = NodePath("start")
+initial_state = NodePath("wait")
 metadata/_custom_type_script = "uid://xd0is48t44l3"
 
 [node name="attack" type="Node" parent="state_machine"]
-script = ExtResource("4_l06os")
+script = ExtResource("7_q145h")
 
 [node name="idle" type="Node" parent="state_machine"]
 script = ExtResource("6_dvlbs")
@@ -626,9 +588,6 @@ script = ExtResource("9_l06os")
 
 [node name="start" type="Node" parent="state_machine"]
 script = ExtResource("10_ytd26")
-
-[node name="hurt" type="Node" parent="state_machine"]
-script = ExtResource("10_ie1m3")
 
 [node name="attack_cooldown" type="Timer" parent="."]
 wait_time = 2.0

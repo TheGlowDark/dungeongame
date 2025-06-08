@@ -7,7 +7,7 @@ class_name Dungeon_room
 @onready var area2d = $Area2D
 @export var hp_spawn_delay = 0.5
 func hp_drop():
-	if randi_range(1, 100) <= hp_chance_drop:
+	if randf()<= hp_chance_drop:
 		await get_tree().create_timer(hp_spawn_delay).timeout
 		var h = heart.instantiate()
 		dropped_items.add_child(h)
@@ -35,7 +35,7 @@ func _ready():
 	#clear_check()
 	
 func _on_area_2d_body_entered(body) -> void:
-	if body is Player and is_instance_valid(fog): #and body.active:
+	if body is Player and !is_entered: #and body.active:
 	#	get_tree().call_group(id, "set_process_mode", Node.PROCESS_MODE_INHERIT)
 		fog.queue_free()
 		is_entered = true

@@ -9,7 +9,9 @@ class_name character_base extends CharacterBody2D
 #@onready var animation_player = $AnimationTree.get("anim_player")
 @onready var sprite := $Sprite2D
 @export var health : int
-@export var stun_time := 0.0
+#@export var stun_time := 0.0
+@export var speed_base = 100
+@export var damage = 1
 var invincible : bool = false
 @export var hurt_sound: AudioStreamWAV
 

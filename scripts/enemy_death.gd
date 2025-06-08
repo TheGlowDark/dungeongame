@@ -2,14 +2,15 @@ extends State
 
 @onready var enemy = $"../.."
 @export var sound: AudioStreamWAV
+@export var death_time = 5
 
 func enter():
 	enemy.velocity = Vector2.ZERO
-	enemy.update_animation(enemy.get_distance().normalized() * Vector2(1, -1))
+	enemy.update_animation(enemy.get_distance() * Vector2(1, -1))
 	enemy.animation_travel("death")
 	enemy.room.enemies_count -= 1
 	enemy.room.clear_check()
 	Global.score += enemy.score * Global.dif_multiplier
 	AudioManager.play_sound(sound, 0, 0.3)
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(death_time).timeout
 	enemy._die()

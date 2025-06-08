@@ -28,7 +28,7 @@ func enter():
 func update(delta : float):
 	if player.health <= 0:
 		state_transition.emit(self, "death")
-	move(dash_direction, delta)
+#	move(dash_direction, delta)
 	if dashing_timer >= 0:
 		dashing_timer -= delta
 	else:
@@ -36,7 +36,7 @@ func update(delta : float):
 		weapon.idle()
 		player.is_attack = false
 		state_transition.emit(self, 'idle')
-
+	move(dash_direction, delta)
 func move(input_dir: Vector2, _delta: float):
 	player.velocity = input_dir * player.attack_speed_boost
 	# flipping sprite if needed
@@ -44,4 +44,4 @@ func move(input_dir: Vector2, _delta: float):
 	if input_dir == Vector2.ZERO:
 		player.velocity = Vector2.ZERO
 		state_transition.emit(self, "idle")
-	player.move_and_slide()
+	#player.move_and_slide()

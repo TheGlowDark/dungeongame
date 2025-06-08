@@ -20,17 +20,14 @@ func enter():
 
 
 func update(delta : float):
-	time_since_last_step += delta
-	if time_since_last_step >= step_cooldown:
-		AudioManager.play_sound(sounds[step_index], 0, 0.1)
-		step_index += 1
-		step_index %= sounds.size()
-		time_since_last_step = 0
-		
 	if player.health <= 0:
 		state_transition.emit(self, "death")
+		return
 	player.update_animation(player.update_look_direction())
 	
+	time_since_last_step += delta
+	step_sounds()
+		
 	var input_dir = player.get_input()
 	move(input_dir, delta)
 
@@ -48,3 +45,10 @@ func move(input_dir: Vector2, _delta: float):
 		player.velocity = Vector2.ZERO
 		state_transition.emit(self, "idle")
 	player.move_and_slide()
+
+func step_sounds():
+	if time_since_last_step >= step_cooldown:
+		AudioManager.play_sound(sounds[step_index], 0, 0.1)
+		step_index += 1
+		step_index %= sounds.size()
+		time_since_last_step = 0

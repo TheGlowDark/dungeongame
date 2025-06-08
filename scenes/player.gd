@@ -118,11 +118,7 @@ func _physics_process(_delta):
 	#if not is_alive:
 	#	velocity = Vector2.ZERO
 	#	return 
-	if not can_attack:
-		attack_cooldown_timer -= _delta
-		if attack_cooldown_timer <= 0:
-			can_attack = true
-			attack_cooldown_timer = attack_cooldown
+	attack_cooldown_update(_delta)
 	time = float(time) + _delta
 	update_ui()
 	#print(can_attack)
@@ -150,6 +146,14 @@ func hp_up(amount):
 		update_hp_icons()
 	return health < 3
 
+func attack_cooldown_update(_delta):
+	if not can_attack:
+		attack_cooldown_timer -= _delta
+		if attack_cooldown_timer <= 0:
+			can_attack = true
+			attack_cooldown_timer = attack_cooldown
+
+
 func update_ui():
 	update_time()
 	update_score()
@@ -165,7 +169,7 @@ func update_time():
 		Global.score = 0
 	 
 func update_score():
-	$UI/Control/VBoxContainer/Score.text = str(Global.score)
+	$UI/VBoxContainer/Score.text = str(Global.score)
 	
 	
 func update_hp_icons():
@@ -191,7 +195,6 @@ func get_input():
 	).normalized()
 
 func update_look_direction():
-	# Получаем позицию мыши в мировых координатах
 	var mouse_pos = get_global_mouse_position()
 	# Вычисляем направление от персонажа к курсору
 	look_direction = (mouse_pos - global_position).normalized()
@@ -233,7 +236,3 @@ func update_look_direction():
 		#animation_state_machine.travel("walk")
 	#else:
 		#animation_state_machine.travel("idle")
-
-
-func _on_second_timeout() -> void:
-	Global.score -= Global.time_score_lose

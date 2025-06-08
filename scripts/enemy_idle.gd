@@ -10,7 +10,7 @@ func update(_delta):
 	if enemy.health <= 0:
 		state_transition.emit(self, "death")
 		return 
-	enemy.update_animation(enemy.get_distance().normalized() * Vector2(1, -1))
+	enemy.update_animation(enemy.get_distance() * Vector2(1, -1))
 #	if(enemy.get_distance().length() <= enemy.attack_distance):d
 #		state_transition.emit(self, "attack")
 		

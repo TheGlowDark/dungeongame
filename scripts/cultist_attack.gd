@@ -1,7 +1,7 @@
 extends State
 
 @onready var enemy = $"../.."
-
+@export var attack: AudioStreamWAV
 func enter():
 	#if enemy.health <= 0:
 		#state_transition.emit(self, "death")
@@ -9,6 +9,7 @@ func enter():
 	# Если игрок в зоне и можно атаковать
 	if enemy.player_attack_check() and enemy.can_attack:
 		enemy.animation_travel("attack")
+		AudioManager.play_sound(attack, 0, 0.1)
 		enemy.attack_timer.start(enemy.attack_cooldown)
 		enemy.velocity = Vector2.ZERO  # Останавливаем движение
 		state_transition.emit(self, "idle")  # Иначе возвращаемся в idle
@@ -20,8 +21,8 @@ func update(_delta: float):
 	if enemy.health <= 0:
 		state_transition.emit(self, "death")
 		return
-	if !enemy.get_player.is_alive:
-		state_transition.emit(self, "start")
+	#if !enemy.get_player.is_alive:
+		#state_transition.emit(self, "start")
 	#enemy.update_animation(enemy.get_distance().normalized() * Vector2(1, -1))
 	# Если таймер атаки закончился и игрок всё ещё в зоне
 	if enemy.attack_timer.is_stopped():

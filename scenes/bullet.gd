@@ -24,7 +24,7 @@ func _physics_process(_delta: float) -> void:
 	global_position += direction * speed * _delta
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Player:  # Или body.is_in_group("player")
+	if body is Player:
 		body._take_damage(1)
 		print(body.health)
 	if not body is Enemy: 

@@ -10,20 +10,20 @@ class_name Enemy_cultist
 @export var charge_sound: AudioStreamWAV
 
 func attack():
-	if can_attack and player_attack_check():
-		AudioManager.play_sound(charge_sound, 0, 0.2)
-		await get_tree().create_timer(attack_delay).timeout
-		if(health > 0):
-			var b = bullet.instantiate()
-			get_parent().get_parent().add_child(b)
-			can_attack = false
-		# Устанавливаем позицию пули в позицию точки спавна
-		# Направление пули к игроку
-			b.global_position = bulletspawnpoint.global_position
-			var players = get_tree().get_nodes_in_group("player")
-			if players.size() > 0:
-				b.direction = (players[0].global_position - b.global_position).normalized()
-			AudioManager.play_sound(attack_s, 0,0.3)
+	#if can_attack and player_attack_check():
+	AudioManager.play_sound(charge_sound, 0, 0.2)
+	await get_tree().create_timer(attack_delay).timeout
+	if(health > 0):
+		var b = bullet.instantiate()
+		get_parent().get_parent().add_child(b)
+		can_attack = false
+	# Устанавливаем позицию пули в позицию точки спавна
+	# Направление пули к игроку
+		b.global_position = bulletspawnpoint.global_position
+		var players = get_tree().get_nodes_in_group("player")
+		if players.size() > 0:
+			b.direction = (players[0].global_position - b.global_position).normalized()
+		AudioManager.play_sound(attack_s, 0,0.3)
 
 func _ready():	
 	process_mode = PROCESS_MODE_DISABLED

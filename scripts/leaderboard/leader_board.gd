@@ -11,9 +11,9 @@ func _ready():
 func appear():
 	get_tree().paused = true
 	visible = true
-	$Panel/VBoxContainer/Score.text += $"../Control/VBoxContainer/Score".text
+	$Panel/VBoxContainer/Score.text += $"../VBoxContainer/Score".text
 	line_edit.text = Global.player_name
-	await Leaderboards.post_guest_score("waximum-waximum-3ZPC", Global.score, Global.player_name)
+	#await Leaderboards.post_guest_score("waximum-waximum-3ZPC", Global.score, Global.player_name)
 	
 
 func _on_line_edit_text_changed(new_text: String) -> void:
