@@ -14,12 +14,41 @@ signal level_generated  # Сигнал о завершении генераци�
 
 func get_room_path(cur_root, index: int):
 	return cur_root + str(index) + ".tscn"
+
 func _ready():
 	# Подключаем сигналы
 	self.connect("rooms_loaded", Callable(self, "_on_rooms_loaded"))
 	
 	# Начинаем загрузку
 	await load_all_rooms()
+	#test(100)
+
+
+func generate_new_level():
+	if(Global.current_level != 1):
+		Global.floor_up()
+	print("Начало генерации уровня...")
+	
+	if current_dungeon:
+		current_dungeon.queue_free()
+	
+	current_dungeon = preload("res://scenes/level.tscn").instantiate()
+	add_child(current_dungeon)
+	
+	# Ждем завершения генерации в дочернем уровне
+	await current_dungeon.generate()
+	
+	emit_signal("level_generated")  # Отправляем сигнал о завершении
+
+func test(number):
+	var start_time = Time.get_ticks_msec()  # Засекаем время
+	print("Выполнение теста...")
+	var timer = Timer.new()
+	for i in range(number):
+		await generate_new_level()
+		var end_time = Time.get_ticks_msec()
+		var elapsed_time = end_time - start_time
+		print("Выполнено тестов: ", i, " за время: ", elapsed_time)
 
 func _on_rooms_loaded():
 	print("Все комнаты загружены, начинаем генерацию уровня")
@@ -112,19 +141,3 @@ func getexitroom():
 		push_error("Пул выходных комнат пуст!")
 		return null
 	return exit_room_pool[randi() % exit_room_pool.size()]
-
-func generate_new_level():
-	if(Global.current_level != 1):
-		Global.floor_up()
-	print("Начало генерации уровня...")
-	
-	if current_dungeon:
-		current_dungeon.queue_free()
-	
-	current_dungeon = preload("res://scenes/level.tscn").instantiate()
-	add_child(current_dungeon)
-	
-	# Ждем завершения генерации в дочернем уровне
-	await current_dungeon.generate()
-	
-	emit_signal("level_generated")  # Отправляем сигнал о завершении

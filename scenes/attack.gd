@@ -12,6 +12,7 @@ var is_dashing = false
 var dashing_timer = dashing_duration
 @onready var dash_direction: Vector2
 func enter():
+	$"../../CollisionShape2D".debug_color = Color(1, 0, 0, 0.4)
 	AudioManager.play_sound(sound, 0, 0.2)
 	player.is_attack = true
 	weapon.attack()

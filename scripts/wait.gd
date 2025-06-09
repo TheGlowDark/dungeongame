@@ -5,6 +5,6 @@ extends State
 
 func enter():
 	enemy.animation_travel("idle")
-	print("!")
+	#print("!")
 	await get_tree().create_timer(waiting_time).timeout
 	state_transition.emit(self, "idle")

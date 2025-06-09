@@ -14,6 +14,7 @@ var step_index: int = 0
 
 
 func enter():
+	$"../../CollisionShape2D".debug_color = Color(0, 1, 0, 0.4)
 	time_since_last_step = step_cooldown
 	if player:
 		player.animation_travel("walk")

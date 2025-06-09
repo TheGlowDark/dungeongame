@@ -7,7 +7,7 @@ class_name Dungeon_room
 @onready var area2d = $Area2D
 @export var hp_spawn_delay = 0.5
 func hp_drop():
-	if randf()<= hp_chance_drop:
+	if randf()<= Global.hp_drop_propability:
 		await get_tree().create_timer(hp_spawn_delay).timeout
 		var h = heart.instantiate()
 		dropped_items.add_child(h)

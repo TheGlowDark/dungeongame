@@ -10,7 +10,8 @@ func enter():
 	enemy.animation_travel("death")
 	enemy.room.enemies_count -= 1
 	enemy.room.clear_check()
-	Global.score += enemy.score * Global.dif_multiplier
+	$"../../CollisionShape2D".debug_color = Color(0, 0, 0, 0.4)
+	Global.score += Global.kill_score(enemy.score)
 	AudioManager.play_sound(sound, 0, 0.3)
 	await get_tree().create_timer(death_time).timeout
 	enemy._die()

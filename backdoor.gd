@@ -11,7 +11,7 @@ func open():
 	
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Player and is_open:
+	if body is Player and is_open and body.is_alive:
 		body.active = false
 		Global.current_level += 1  # Увеличиваем уровень
 		#await body.wait()

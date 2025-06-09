@@ -52,10 +52,23 @@ func _ready():
 	#$Player.position = start_position
 	player.active = true
 	
+
+func generate():
+	#run_tests()
+	#TARGET_ROOM_COUNT += Global.Room_add
+	#print("Генерация структуры уровня...")
+	initialize_pools()
+	generate_paths()
+	#print_layout()
+	build_dungeon()
+	map.initializate(layout)
+	player.update_floor()
+	#print(layout)
 	
-func run_tests():
+	
+func run_tests(number):
 	print("Запуск тестов...")
-	for i in range(1000):
+	for i in range(number):
 		layout = []
 		rooms = {}
 		test_initialize_grid()
@@ -136,37 +149,26 @@ func test_position_validation():
 	
 	print("Тест position_validation() пройден успешно")
 	
-func generate():
-	#run_tests()
-	#TARGET_ROOM_COUNT += Global.Room_add
-	print("Генерация структуры уровня...")
-	initialize_pools()
-	generate_paths()
-	print_layout()
-	build_dungeon()
-	map.initializate(layout)
-	player.update_floor()
-	print(layout)
 	
 func initialize_pools():
 	cur_start_room_pool = get_parent().start_room_pool.duplicate()
 	cur_room_pool = get_parent().room_pool.duplicate()
 	cur_exit_room_pool = get_parent().exit_room_pool.duplicate()
 	
-func test_room_number():
-	var count_correct = 0
-	for i in range(1000):
-		run_tests()
-		rooms = {}
-		layout = []
-		randomize()
-		initialize_grid()
-		generate_paths()
-		if (rooms.size() == TARGET_ROOM_COUNT):
-			count_correct += 1
-	if(count_correct == 1000):
-		print("Ошибок не обнаружено")
-	
+#func test_room_number():
+	#var count_correct = 0
+	#for i in range(1000):
+		##run_tests()
+		#rooms = {}
+		#layout = []
+		#randomize()
+		#initialize_grid()
+		#generate_paths()
+		#if (rooms.size() == TARGET_ROOM_COUNT):
+			#count_correct += 1
+	#if(count_correct == 1000):
+		#print("Ошибок не обнаружено")
+	#
 	
 func build_dungeon():
 	#for j in range(GRID_WIDTH):
@@ -248,7 +250,7 @@ func get_path_distance(from_pos, to_pos):
 	
 	return -1  # Если путь не найден
 
-	return true
+#	return true
 
 #func generate_paths():
 	#initialize_grid()
@@ -293,7 +295,8 @@ func generate_paths():
 	rooms[start_room_pos] = {
 		type = RoomType.START, 
 		connections = [],
-		distance = 0  # Расстояние от старта
+		distance = 0,  # Расстояние от старта
+		from_direction = null  # Направление, откуда пришли (для старта нет)
 	}
 	
 	var queue = [start_room_pos]
@@ -307,14 +310,21 @@ func generate_paths():
 	while rooms.size() < TARGET_ROOM_COUNT and not queue.is_empty():
 		var current_pos = queue.pop_front()
 		var current_dist = rooms[current_pos].distance
+		var from_direction = rooms[current_pos].from_direction
 		
-		directions.shuffle()
-		var num_directions = min(4, TARGET_ROOM_COUNT - rooms.size())
+		# Создаем список доступных направлений, исключая направление, откуда пришли
+		var available_directions = directions.duplicate()
+		if from_direction != null:
+			available_directions.erase(-from_direction)  # Исключаем обратное направление
+		
+		available_directions.shuffle()
+		var num_directions = min(available_directions.size(), TARGET_ROOM_COUNT - rooms.size())
 		if num_directions > 0:
 			num_directions = randi() % num_directions + 1
 			
 			for i in range(num_directions):
-				var new_pos = current_pos + directions[i]
+				var dir = available_directions[i]
+				var new_pos = current_pos + dir
 				
 				if is_valid_room_position(new_pos) and not visited.has(new_pos):
 					# Добавляем комнату с расстоянием на 1 больше текущего
@@ -323,7 +333,8 @@ func generate_paths():
 					rooms[new_pos] = {
 						type = RoomType.NORMAL,
 						connections = [current_pos],
-						distance = new_dist
+						distance = new_dist,
+						from_direction = dir  # Запоминаем направление, откуда пришли
 					}
 					rooms[current_pos].connections.append(new_pos)
 					queue.append(new_pos)
@@ -342,9 +353,15 @@ func generate_paths():
 		var existing_rooms = rooms.keys()
 		var random_room_pos = existing_rooms[randi() % existing_rooms.size()]
 		var current_dist = rooms[random_room_pos].distance
+		var from_direction = rooms[random_room_pos].from_direction
 		
-		directions.shuffle()
-		for dir in directions:
+		# Создаем список доступных направлений, исключая направление, откуда пришли
+		var available_directions = directions.duplicate()
+		if from_direction != null:
+			available_directions.erase(-from_direction)
+		
+		available_directions.shuffle()
+		for dir in available_directions:
 			var new_pos = random_room_pos + dir
 			if is_valid_room_position(new_pos) and not rooms.has(new_pos):
 				var new_dist = current_dist + 1
@@ -352,7 +369,8 @@ func generate_paths():
 				rooms[new_pos] = {
 					type = RoomType.NORMAL,
 					connections = [random_room_pos],
-					distance = new_dist
+					distance = new_dist,
+					from_direction = dir  # Запоминаем направление, откуда пришли
 				}
 				rooms[random_room_pos].connections.append(new_pos)
 				

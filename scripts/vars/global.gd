@@ -2,8 +2,9 @@ extends Node
 
 var player_name = "Player"
 
-var dif_multiplier = 1.0
+var dif_multiplier = 1
 const dif_initial = 1.0
+@export var max_dif = 2
 @export var k = 0.05
 
 
@@ -19,7 +20,6 @@ var room_add = 0
 @export var room_add_limit = 15
 @export var hp_drop_propability_initial = 0.3
 @export var min_hp_drop_propability = 0.05
-@export var max_dif = 2
 var hp_drop_propability = hp_drop_propability_initial
 
 
@@ -50,10 +50,11 @@ func floor_up():
 func dif_up():
 	dif_multiplier = min(max_dif, dif_initial + k * current_level)
 	#if (hp_drop_propability > 10):
-	hp_drop_propability = max(min_hp_drop_propability, max_dif - dif_initial * hp_drop_propability_initial)
+	hp_drop_propability = max(min_hp_drop_propability, max_dif - dif_multiplier * hp_drop_propability_initial)
 	#enemy_speed_up()
 		
-		
+func kill_score(k_score):
+	return k_score * dif_multiplier * dif_multiplier
 #func enemy_speed_up():
 	#butcher_speed_base = 120 * multiplier 
 	#cultist_speed_base = 50 * multiplier

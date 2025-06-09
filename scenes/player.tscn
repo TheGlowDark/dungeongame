@@ -396,6 +396,7 @@ collision_mask = 2
 visibility_layer = 3
 position = Vector2(6.25, -4)
 shape = SubResource("RectangleShape2D_smehm")
+debug_color = Color(0.976471, 0, 0, 0.419608)
 
 [node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_dqkch")

@@ -64,7 +64,6 @@ func attack():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player and fsm.current_state != fsm.states.get("death"):
 		is_player_in_range = true
-		
 		# Добавляем проверку, чтобы избежать множественных атак
 		if is_attacking:
 			#is_attacking = true
@@ -74,7 +73,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			if is_player_in_range and fsm.current_state != fsm.states.get("death"):
 				fsm.change_state(fsm.current_state, "attack")
 			is_attacking = false
-
+			$Area2D/Attack_area.debug_color = Color.BLUE
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is Player:

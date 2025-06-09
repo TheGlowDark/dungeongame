@@ -37,7 +37,7 @@ func open():
 
 func _on_body_entered(body):
 	#print(room.enemies_count)
-	if body is Player and is_open:
+	if body is Player and is_open and body.is_alive:
 		#var transition = Vector2.ZERO
 		print("!!")
 		body.map.update(next_room)

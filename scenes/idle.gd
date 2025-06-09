@@ -3,6 +3,7 @@ extends State
 @onready var player := $"../.."
 
 func enter():
+	$"../../CollisionShape2D".debug_color = Color(0, 0, 1, 0.4)
 	player.animation_travel("idle")
 	
 func update(_delta):

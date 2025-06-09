@@ -526,7 +526,7 @@ _data = {
 size = Vector2(20, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cb6f2"]
-size = Vector2(13, 12)
+size = Vector2(13, 10)
 
 [node name="Enemy_cultsit" type="CharacterBody2D"]
 z_index = 1
@@ -595,7 +595,9 @@ one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
-debug_path_custom_point_size = 10.25
+debug_use_custom = true
+debug_path_custom_color = Color(0.897907, 0.608666, 0.361354, 1)
+debug_path_custom_point_size = 5.0
 debug_path_custom_line_width = 0.3
 
 [node name="Path_check" type="Timer" parent="."]
@@ -609,9 +611,7 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
 visibility_layer = 2
-position = Vector2(0.5, 4)
+position = Vector2(0.5, 3)
 shape = SubResource("RectangleShape2D_cb6f2")
-
-[node name="attack_delay" type="Timer" parent="."]
 
 [connection signal="timeout" from="Path_check" to="." method="_on_path_check_timeout"]

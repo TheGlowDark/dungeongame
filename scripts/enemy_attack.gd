@@ -5,7 +5,7 @@ extends State
 func enter():
 	#if enemy.health <= 0:
 		#state_transition.emit(self, "death")
-	
+	$"../../CollisionShape2D".debug_color = Color(1, 0, 0, 0.4)
 	# Если игрок в зоне и можно атаковать
 	if enemy.player_attack_check() and enemy.can_attack:
 		enemy.animation_travel("attack")

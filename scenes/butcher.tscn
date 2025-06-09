@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://341ik3peqgwd" path="res://scenes/start.gd" id="10_21y2r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cb6f2"]
-size = Vector2(14, 24)
+size = Vector2(22, 14)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gqgfl"]
 animation = &"attack_left"
@@ -564,7 +564,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xngwu"]
-size = Vector2(12, 14)
+size = Vector2(12, 12)
 
 [node name="butcher" type="CharacterBody2D"]
 z_index = 1
@@ -582,8 +582,9 @@ hurt_sound = ExtResource("2_rk7q0")
 [node name="Attack_area" type="CollisionShape2D" parent="Area2D"]
 light_mask = 2
 visibility_layer = 2
-position = Vector2(-6, 2)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_cb6f2")
+debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_u5222")
@@ -637,7 +638,9 @@ one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
-debug_path_custom_point_size = 10.25
+debug_use_custom = true
+debug_path_custom_color = Color(0.898039, 0.607843, 0.360784, 1)
+debug_path_custom_point_size = 5.0
 debug_path_custom_line_width = 0.3
 
 [node name="Path_check" type="Timer" parent="."]
@@ -647,11 +650,8 @@ autostart = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
 visibility_layer = 2
-position = Vector2(0, 3)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_xngwu")
-
-[node name="attack_delay" type="Timer" parent="."]
-wait_time = 0.1
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

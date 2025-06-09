@@ -36,9 +36,18 @@ func initializate(l):
 	# Создаем матрицу
 	create_matrix()
 	update(first_room)
+	#reveal_map()
 	# Тестовая окраска
 	#set_cell_color(Vector2(2, 3), Color.red)
 
+
+func reveal_map():
+	for y in range(grid_size.y):
+		for x in range(grid_size.x):
+			if layout[y][x] != 0:
+				matrix[y][x].color = unvisited
+	matrix[first_room.x][first_room.y].color = current
+	
 func create_matrix():
 	for y in range(grid_size.y):
 		var row = []
@@ -49,6 +58,7 @@ func create_matrix():
 			add_child(cell)
 			row.append(cell)
 		matrix.append(row)
+	
 
 
 # Изменить цвет конкретной ячейки
